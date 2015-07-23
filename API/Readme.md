@@ -35,11 +35,11 @@ Or for static use
 
 **registerLayouts()**
 
-It is responsible for registering all the layouts that are passed as a parameter to the UIAdaptation module. It also validates the implementation of each of the layouts.
+It registers all the layouts that are sent as a parameter to the UIAdaptation module. It also validates the implementation of each one of the layouts.
 
 Example:
 
-It is used internally in the UIAdaptation module to record all layouts that are passed:
+It is used internally in the UIAdaptation module to record all the available layouts:
 
 ```javascript
 define(
