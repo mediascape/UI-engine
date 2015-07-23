@@ -97,17 +97,10 @@ console.log( bestL[0].name );
 /* returns ['menu','pip']*/
 ```
 
-**LAYOUT CONSTRUCTION**
+## LAYOUT CONSTRUCTION: STRUCTURE
+[Top][]
        
-It is essential to have a generic layout structure in order to manage it heterogeneously. Carrying out a structured development of the layouts, it will be possible to create a system of intelligent,automatic and easily defined layouts.
-
-On the one hand, the system must be flexible to the needs of the developer, allowing to articulate different ways of rendering the content. Therefore, three different modes have been established: STATIC, CUSTOM and ADAPTABLE. The developer is the one who makes the choice.
-
-On the other hand, the system must be capable of managing different events that arise in the application, so it has to be able to support those different events. In this sense, the platform has the ability to validate the implementations and display when any event is not being treated. Finally, it is interesting for the system to be able to sort the layouts depending on the context.
-
-Considering what has been discussed above, it has been generated a predefined structure to make easier the building of new layouts, and also to validate the implementation done.
-
-Each developed layout must implement the following functions:
+Since the UI-engine in based on layout templates, it is essential to have a generic and structured way to create new layouts. Each included layout must implement the following functions:
 
 What to do when a component has changed.
  ```javascript
@@ -133,17 +126,19 @@ onLayoutChangeEvent = function (cmps){
       console.log("layout changed");
     }
 ```    
-What to do when layout is unloaded
+What to do when the layout is unloaded
 ```javascript
 onUnload = function (cmps){
       console.log("unloading layout ");
     }
   ```
 
-**AN ACTUAL IMPLEMENTATION**
+## LAYOUT CONSTRUCTION: IMPLEMENTATION
+[Top][]
 
-These are the guidelines to follow in order to add a new layout to UIAdaptation module.
-The first thing to do is to create a new file with the .js extension in the folder:
+These is the guideline to add a new layout to UIAdaptation module.
+
+The first thing is to create a new file with the .js extension in the following folder:
 
 mediascape/AdaptationToolkit/Adaptation/UIAdaptation/layouts/
 
@@ -186,15 +181,16 @@ define(
 
 ```
 
-**VALIDATE THE LAYOUT**
+## LAYOUT CONSTRUCTION: VALIDATION
+[Top][]
 
-To verify that the system has registered the new layout and that it can be used, testing can be performed through mediascape module:
+The following codes verifies the adequate registry of the new layout:
 
 ```javascript
 var layouts = mediascape.AdaptationToolkit.Adaptation.UIAdaptation.getLayouts());
 console.log(layouts[1].checkForImplementation());
 ```
-If all goes well, it will return 0 errors and you can start using your new layout.
+For a successful validation it will return 0 errors. It means the layout is ready to use.
 
 [Top]: #overview
 
