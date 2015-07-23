@@ -1,7 +1,7 @@
 UI-engine API
 ========================
 
-UIENGINE (User Interface Engine) is a module created by Vicomtech-IK4 to create reponsive and adaptive user interface layouts for multi-device media applications.
+UI-engine (User Interface Engine) is a module created by Vicomtech-IK4 to create reponsive and adaptive user interface layouts for multi-device media applications.
 
 API DEFINITION
 --------------
