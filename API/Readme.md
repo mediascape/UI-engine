@@ -19,6 +19,14 @@ Example:
  document.addEventListener('adaptationToolkit-ready',function(data){
     var UI = mediascape.AdaptationToolkit.Adaptation.UIAdaptation;
     UI.init(data.detail.components,UI.LAYOUTMODE.ADAPTABLE);
+  },false);
+```
+Or for static use
+
+```javascript
+ document.addEventListener('adaptationToolkit-ready',function(data){
+    var UI = mediascape.AdaptationToolkit.Adaptation.UIAdaptation;
+    UI.init(data.detail.components,UI.LAYOUTMODE.STATIC);
     UI.useLayout(‘pip’);
   },false);
 ```
