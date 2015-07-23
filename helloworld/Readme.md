@@ -21,6 +21,23 @@ After ensure the webserver is running you could run the UI-Engine helloworl at t
 ```
 ### Result
 
+Pip Layout
+---------
+
+![Pip](https://raw.githubusercontent.com/itamayo/mediascape-images/master/images/pip.png)
+
+Menu Layout
+---------
+![Pip](https://raw.githubusercontent.com/itamayo/mediascape-images/master/images/menu.png)
+
+Horizontal Layout
+------------------
+![Horizontal](https://raw.githubusercontent.com/itamayo/mediascape-images/master/images/horizontal.png)
+
+Grid Layout
+------------------
+![grid](https://raw.githubusercontent.com/itamayo/mediascape-images/master/images/grid_editable.png)
+
 
 [Installation]: #installation
 [Prerequisite]: #prerequisite
