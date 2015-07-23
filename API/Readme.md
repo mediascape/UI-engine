@@ -75,7 +75,7 @@ window.addEventListener(‘deviceorientation’,onOrientationChange,false);
 
 **onLayoutChangeEvent ()**
 
-This callback will be able to handle the request for a change of layout, for example when a button is pressed:
+This callback will be able to handle the request from the user to change the layout, for example when the user presses a button in the User Interface:
 ```html
 <button onclick=”onLayoutChangeEvent”>Change Layout</button>
 ```
