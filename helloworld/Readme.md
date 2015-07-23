@@ -28,16 +28,23 @@ Pip Layout
 
 Menu Layout
 ---------
-![Pip](https://raw.githubusercontent.com/itamayo/mediascape-images/master/images/menu.png)
+![Pip](https://raw.githubusercontent.com/mediascape/UI-engine/master/helloworld/images/menu.png)
 
-Horizontal Layout
+Accordion Layout
 ------------------
-![Horizontal](https://raw.githubusercontent.com/itamayo/mediascape-images/master/images/horizontal.png)
+![Horizontal](https://raw.githubusercontent.com/mediascape/UI-engine/master/helloworld/images/Accordion.png)
 
 Grid Layout
 ------------------
-![grid](https://raw.githubusercontent.com/itamayo/mediascape-images/master/images/grid_editable.png)
+![grid](https://raw.githubusercontent.com/mediascape/UI-engine/master/helloworld/images/grid.png)
 
+VerticalMenu Layout
+------------------
+![verticalMenu](https://raw.githubusercontent.com/mediascape/UI-engine/master/helloworld/images/verticalmenu.png)
+
+Spinner Layout
+------------------
+![spinner](https://raw.githubusercontent.com/mediascape/UI-engine/master/helloworld/images/spinner.png)
 
 [Installation]: #installation
 [Prerequisite]: #prerequisite
