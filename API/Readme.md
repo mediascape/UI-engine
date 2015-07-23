@@ -192,5 +192,12 @@ console.log(layouts[1].checkForImplementation());
 ```
 For a successful validation it will return 0 errors. It means the layout is ready to use.
 
+## EXAMPLE
+[Top][]
+
+You can find the implementation of an example for the use of the code in the web:
+
+https://github.com/mediascape/UI-engine/tree/master/helloworld
+
 [Top]: #overview
 
