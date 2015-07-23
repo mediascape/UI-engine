@@ -5,8 +5,8 @@
 
 The UI-engine library (User Interface Engine) provides mechanisms to create reponsive and adaptive user interface layouts for multi-device media applications. When application developers are facing a single-device user interface, they define CSS templates to organise the items in the layout, usually creating a different template for each target device. However, when application developers are dealing with multi-device applications, this approximation becomes unapproachable. For instance, for an application with 6 different items, within a multi-device scenario, a single device could show all the components, only 5 of them, 4 of them, etc. Furthermore, when for example 4 items are shown on a device, the combinatory of selecting 4 components from a total of 6 rises 15 different options. As a result, an application of 6 items has 64 different combinations to create a layout template for each target device. This library provides a more versatile solution in order to create responsive and adaptive User Interfaces depending the multi-device context of the user, based on layout templates.
 
-API DEFINITION
---------------
+## API
+[Top][]
 
 **init (components, LAYOUTMODE)**
 
