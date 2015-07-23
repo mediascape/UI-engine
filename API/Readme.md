@@ -1,5 +1,8 @@
 # UI-engine API
 
+## Navigation
+[Overview][] | [API][] | [Layout Construction: Structure][] | [Layout Construction: Implementation][] | [Layout Construction: Validation][] | [Example][]
+
 ## Overview
 [Top][]
 
@@ -97,7 +100,7 @@ console.log( bestL[0].name );
 /* returns ['menu','pip']*/
 ```
 
-## LAYOUT CONSTRUCTION: STRUCTURE
+## Layout Construction: Structure
 [Top][]
        
 Since the UI-engine in based on layout templates, it is essential to have a generic and structured way to create new layouts. Each included layout must implement the following functions:
@@ -133,7 +136,7 @@ onUnload = function (cmps){
     }
   ```
 
-## LAYOUT CONSTRUCTION: IMPLEMENTATION
+## Layout Construction: Implementation
 [Top][]
 
 These is the guideline to add a new layout to UIAdaptation module.
@@ -181,7 +184,7 @@ define(
 
 ```
 
-## LAYOUT CONSTRUCTION: VALIDATION
+## Layout Construction: Validation
 [Top][]
 
 The following codes verifies the adequate registry of the new layout:
@@ -192,12 +195,18 @@ console.log(layouts[1].checkForImplementation());
 ```
 For a successful validation it will return 0 errors. It means the layout is ready to use.
 
-## EXAMPLE
+## Example
 [Top][]
 
 You can find the implementation of an example for the use of the code in the web:
 
 https://github.com/mediascape/UI-engine/tree/master/helloworld
 
-[Top]: #overview
+[Top]: #navigation
+[Overview]: #overview
+[API]: #api
+[Layout Construction: Structure]: #layout-construction:-structure
+[Layout Construction: Implementation]: #layout-construction:-implementation
+[Layout Construction: Validation]: #layout-construction:-validation
+[Example]: #example
 
