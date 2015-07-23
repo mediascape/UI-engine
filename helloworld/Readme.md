@@ -46,6 +46,14 @@ Spinner Layout
 ------------------
 ![spinner](https://raw.githubusercontent.com/mediascape/UI-engine/master/helloworld/images/spinner.png)
 
+On Tablet
+------------------
+![tablet](https://raw.githubusercontent.com/mediascape/UI-engine/master/helloworld/images/accordion-tablet.png)
+
+On Mobile
+------------------
+![mobile](https://raw.githubusercontent.com/mediascape/UI-engine/master/helloworld/images/horizontalMobil.png)
+
 [Installation]: #installation
 [Prerequisite]: #prerequisite
 [Deployment]: #deployment
