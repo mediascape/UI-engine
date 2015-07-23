@@ -1,0 +1,262 @@
+<polymer-element name="component-query">
+  <!--<script src="MutationObserver.js"></script>-->
+
+  <script>
+  Polymer('component-query', {
+    elem:null,
+    observer: null,
+    done:false,
+    mediaList:[],
+    created:function(){
+      console.log('component-query created');
+      var self = this;
+      var toObserve = this.impl ? this.impl :this;
+     
+    },
+    ready: function() {
+     
+      //console.log(this);
+    },
+    domReady:function(){
+     
+      var self = this;
+      this.done = true;
+      /* content query rules from components style */
+    },
+    detached:function (){
+      
+    },
+    attached:function (){
+     
+    },
+    doneChanged:function (){
+      //  console.log()
+    if (window.mediascape){
+      var self = this;
+      var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+      this.observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.attributeName === 'style'){
+            this.updateNodes();
+            var event = new CustomEvent('resize', { 'detail': 'emulate' });
+            window.dispatchEvent(event);
+          }
+        },self);
+      });
+      this.observer.observe(this, {
+        attributes: true,
+        attributeFilter: ["style", "dir"],
+        childList: true
+      });
+    }
+  window.addEventListener('components-ready',(function(_this){return function(){
+      _this.mediaList = mediascape.AdaptationToolkit.componentManager.cssParser.readComponentCSS(_this);
+      _this.updateNodes();
+    }})(this),false);
+    },
+    // Whenever component style is changed update to correspondos @media
+    updateNodes:function (){
+      var applyinRule = false;
+      var mediaRule = this.mediaList.filter(function(el,i){
+        var currentWidth =this.style.width != ""? this.style.width:this.clientWidth;
+        var currentHeight = this.style.height != ""? this.style.height:this.clientHeight;
+        var currentRatio = parseInt(currentWidth)/parseInt(currentHeight);
+        var ua = navigator.userAgent.toLowerCase();
+        var check = function(r) {
+          return r.test(ua);
+        };
+        var isIE =check(/rv:11.0/);
+        if(isIE){
+          var aux = el.media.item(0).split('all and ')[1];
+        }
+        else{
+          var aux =el.media.item(0);
+        }
+        var and=aux.split('and');
+        if(and.length===2){
+          var a=and[0];
+          var b=and[1];
+          var ok_a=false;
+          var ok_b=false;
+          var width = parseInt(a.split('max-width:')[1]);
+          if(isNaN(width)===false)
+          {
+            if (parseInt(currentWidth)<=width)
+            {
+              ok_a=true;
+            }
+            else {
+              ok_a=false;
+            }
+          }
+          else{
+            var width = parseInt(a.split('min-width:')[1]);
+            if(isNaN(width)===false){
+              if (parseInt(currentWidth)>=width)
+              {
+                ok_a=true;
+              }
+              else
+              {
+                ok_a=false;
+              }
+            }else {
+            var ratio = a.split('min-aspect-ratio:')[1];
+            if(isNaN(parseInt(ratio))===false)
+            {
+              ratio = parseInt(ratio.split('/')[0])/parseInt(ratio.split('/')[1]);
+              if (this.compareAspectRatio(currentRatio,ratio))
+              {
+             
+                ok_a=true;
+              }
+              else {
+                ok_a=false;
+              }
+            }
+          }
+          }
+          var width = parseInt(b.split('max-width:')[1]);
+          if(isNaN(width)===false)
+          {
+            if (parseInt(currentWidth)<=width)
+            {
+              ok_b=true;
+            }
+            else {
+              ok_b=false;
+            }
+          }
+          else{
+            var width = parseInt(b.split('min-width:')[1]);
+            if(isNaN(width)===false){
+              if (parseInt(currentWidth)>=width)
+              {
+                ok_b=true;
+              }
+              else
+              {
+                ok_b=false;
+              }
+            }
+          else{
+          var ratio = b.split('min-aspect-ratio:')[1];
+          if(isNaN(parseInt(ratio))===false)
+          {
+            ratio = parseInt(ratio.split('/')[0])/parseInt(ratio.split('/')[1]);
+            if (this.compareAspectRatio(currentRatio,ratio))
+            {
+             
+              ok_b=true;
+            }
+            else {
+              ok_b=false;
+            }
+          }
+          }
+        }
+          if(ok_a===true && ok_b===true)return true;
+          else return false;
+        }
+        if(and.length===3){
+          var a=and[0];
+          var b=and[1];
+          var c=and[2];
+          var ok_a=false;
+          var ok_b=false;
+          var ok_c=false;
+        }
+        else{
+          var width = parseInt(aux.split('max-width:')[1]);
+          if(isNaN(width)===false)
+          {
+            if (parseInt(currentWidth)<=width)
+            {
+              ok_a =true;
+            }
+            else {
+              return false;
+            }
+          }
+          else{
+            var width = parseInt(aux.split('min-width:')[1]);
+            if(isNaN(width)===false){
+              if (parseInt(currentWidth)>=width)
+              {
+                ok_a = true;
+              }
+              else
+              {
+                return false;
+              }
+            }
+            var ratio = aux.split('aspect-ratio:')[1];
+            if(isNaN(parseInt(ratio))===false)
+            {
+              ratio = parseInt(ratio.split('/')[0])/parseInt(ratio.split('/')[1]);
+              if (this.compareAspectRatio(currentRatio,ratio))
+              {
+                ok_a = true;
+              }
+              else {
+                return false;
+              }
+            }
+          }
+          if (ok_a) return true;
+          else return false;
+        }
+      },this);
+      var obj=[];
+      for(var l=0;l<mediaRule.length;l++){
+        for (var m = 0 ; m < mediaRule[l].cssRules.length; m++){
+          obj[mediaRule[l].cssRules[m].selectorText] = mediaRule[l].cssRules[m].cssText.split('{')[1].split('}')[0];
+          var style = mediaRule[l].cssRules[m].style;
+          var elem=[];
+          elem =   this.shadowRoot.querySelectorAll(''+mediaRule[l].cssRules[m].selectorText);
+          if(elem.length!=0){
+            for (var i=0;i<style.length;i++){
+              if (!isNaN(i)){
+                for(var k=0;k<elem.length;k++){
+                  elem[k].style[style[i]] = style[style[i]];
+                  //  this.style[style[i]] = style[style[i]];
+                }
+              }
+            }
+            applyinRule = true;
+            this.shadowRoot.querySelector(''+mediaRule[l].cssRules[m].selectorText).style=mediaRule[l].cssRules[m].cssText.split('{')[1].split('}')[0];
+            this.fire('component-query',{element:mediaRule[l].cssRules[m].selectorText,style:mediaRule[l].cssRules[m].cssText.split('{')[1].split('}')[0]});
+          }
+        }
+      }
+    },
+    compareAspectRatio:function(elementRatio,queryRatio){
+      var epsilon = 1.01;
+      var verticalOptions = [1/2,1/3,1/4,1/8,1/10,1/11,1/12,1/13,1/14]
+      var horizontalOptions = [2/1,3/1,4/1,8/1,9/1,10/1,11/1,12/1,13/1,14/1];
+      var fullOptions = [13/9,12/8,12/6,10/7,9/7];
+      var existsVertical = verticalOptions.filter(function(el){
+         if (Math.abs(elementRatio - el)<epsilon) return true;
+      });
+      var existsHorizontal = horizontalOptions.filter(function(el){
+         if (Math.abs(elementRatio - el)<epsilon) return true;
+      });
+      var existsFull = fullOptions.filter(function(el){
+         if (Math.abs(elementRatio - el)<epsilon) return true;
+      });
+      if (existsVertical.length>0){
+          if (Math.abs(existsVertical[0]-queryRatio)<epsilon) return true;
+          else return false;
+      }
+      else if (existsHorizontal.length>0){
+          if (Math.abs(existsHorizontal[0]-queryRatio)<epsilon) return true;
+          else return false;
+      }
+      else if (existsFull.length>0){
+          if (Math.abs(existsFull[0]-queryRatio)<epsilon) return true;
+          else return false;
+      }
+    }
+  });
+  </script>
+</polymer-element>

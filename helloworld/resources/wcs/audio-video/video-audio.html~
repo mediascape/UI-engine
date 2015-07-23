@@ -1,0 +1,223 @@
+<link rel="import" href="components/polymer/polymer.html">
+<link rel="import" href="media-query.html">
+<polymer-element name="x-media" attributes="id start_time currTime start_volume file subtitles">
+
+<template>
+
+<style>
+	.w1{
+		width:1280px;	
+		height:800px;
+	}
+	.w2{
+		width:1190px;	
+		
+	}
+	.w3{
+		width:800px;	
+		
+	}
+	.w4{
+		width:500px;	
+		
+	}
+	.w5{
+		width:300px;	
+		
+	}
+	
+	
+</style>
+
+<media-query  query="{{query}}" queryMatches="{{qMatches}}"></media-query>
+ <div style="margin-left:150px;"id="audio_img"></div>	      
+<div  id="container"></div>
+
+</template>
+
+ <script>
+ Polymer('x-media',{
+      
+    
+    query:['(max-width: 1500px) and (min-width: 1220px)','(max-width: 1219px) and (min-width: 1000px)','(max-width: 999px) and (min-width: 800px)','(max-width: 799px) and (min-width: 600px)','(max-width: 599px) and (min-width: 300px)'],
+    l:'',
+    ready: function() {
+	q=this.query;
+        if(this.id=="video"){
+		   var video=document.createElement('video');
+		   video.src=this.file;
+		   video.preload="auto";
+		   video.innerHTML='<track kind="subtitles" src="'+this.subtitles+'" srclang="en" default></track>';
+		   this.$.container.appendChild(video);
+		   video.play();
+	 	   video.pause();
+		   function canPlayV(e) {
+		  	 video.volume=this.start_volume;
+	    	   	 video.play();
+		   	 video.currentTime = this.start_time;
+		   	 var v_length=video.duration;
+		   	this.fire('length',v_length);
+	 		document.getElementById("video").removeEventListener("canplay",canPlayV,false);
+		
+		   }
+	   	    document.getElementById("video").addEventListener("canplay",canPlayV,false);
+	    
+	    
+	    		document.addEventListener('PlayPause', function(e) {
+		    		if (video.paused)
+			   	  video.play();
+				else
+			   	  video.pause();
+		    });
+ 	 	
+	    	   document.addEventListener('Mute', function(e) {
+    		       if(video.muted){video.muted=false;}
+			else{video.muted=true;}
+     	    	   });	
+		    document.querySelector('x-media').addEventListener('timeupdate', function(e) {
+			var time=video.currentTime;
+			var vol=video.volume;
+			this.fire('time',{'time':time,'vol':vol});  	
+			
+	     	    });
+	   
+		   document.addEventListener('timeChange', function(e) {
+		
+			video.currentTime=(event.detail.value*video.duration)/event.detail.maxtime;
+		
+		
+			
+		
+		   });
+	   
+		   document.addEventListener('volChange', function(e) {
+			 video.volume=event.detail.value/event.detail.maxvol;
+		
+		   });
+	   
+        }
+	else if(this.id=="audio"){
+	  
+		  var image=document.createElement('img');
+		   image.src="audio.png";	
+		   this.$.audio_img.appendChild(image);
+		   var audio=document.createElement('audio');
+		   audio.src=this.file;
+		   audio.preload="auto";
+		   this.$.container.appendChild(audio);
+		   audio.play();
+	 	   audio.pause();
+		   function canPlay(e) {
+		  	 audio.volume=this.start_volume;
+	    	   	 audio.play();
+		   	 audio.currentTime = this.start_time;
+		   	 var a_length=audio.duration;
+		   	this.fire('length',a_length);
+	 		document.getElementById("audio").removeEventListener("canplay",canPlay,false);
+		
+		   }
+	   	document.getElementById("audio").addEventListener("canplay",canPlay,false);
+	    
+		
+	   
+
+		    document.addEventListener('PlayPause', function(e) {
+	    		if (audio.paused)
+		   	  audio.play();
+			else
+		   	  audio.pause();
+	     	    });
+	 	   
+		    document.addEventListener('Mute', function(e) {
+	    		if(audio.muted){audio.muted=false;}
+			else{audio.muted=true;}
+	     	    });	
+
+		   document.querySelector('x-media').addEventListener('timeupdate', function(e) {
+			var time=audio.currentTime;
+			var vol=audio.volume;
+			this.fire('time',{'time':time,'vol':vol});  	
+			
+	     	    });
+		   
+		   document.addEventListener('timeChange', function(e) {
+		
+			audio.currentTime=(event.detail.value*audio.duration)/event.detail.maxtime;
+		
+			console.log('time');
+			
+		
+		   });
+	   
+		   document.addEventListener('volChange', function(e) {
+			 audio.volume=event.detail.value/event.detail.maxvol;
+		
+		   });
+
+	}
+	this.currTimeChanged(this.getAttribute('currTime'));
+    	this.addEventListener('core-media-change', function(e) {
+		
+		if(this.id=="video"){
+			
+			if(e.detail.media===q[0] && e.detail.matches===true)
+				video.className="w1";
+			if(e.detail.media===q[1] && e.detail.matches===true)
+				video.className="w2";
+			if(e.detail.media===q[2] && e.detail.matches===true)
+				video.className="w3";
+			if(e.detail.media===q[3] && e.detail.matches===true)
+				video.className="w4";
+			if(e.detail.media===q[4] && e.detail.matches===true)
+				video.className="w5";			
+		}
+		else if(this.id=="audio"){
+			if(e.detail.media===q[0] && e.detail.matches===true){
+				audio_img.children[0].style.width="800px";
+				audio_img.children[0].style.marginLeft="200px";
+			}
+			if(e.detail.media===q[1] && e.detail.matches===true){
+				audio_img.children[0].style.width="500px";
+				audio_img.children[0].style.marginLeft="150px";
+			}
+			if(e.detail.media===q[2] && e.detail.matches===true){
+				audio_img.children[0].style.width="350px";
+				audio_img.children[0].style.marginLeft="70px";
+			}
+			if(e.detail.media===q[3] && e.detail.matches===true){
+				audio_img.children[0].style.width="200px";
+				audio_img.children[0].style.marginLeft="-10px";
+			}
+			if(e.detail.media===q[4] && e.detail.matches===true){
+				audio_img.children[0].style.width="100px";
+				audio_img.children[0].style.marginLeft="-50px";
+				
+			}
+			
+			
+		}
+    	 });	
+		 
+    },
+    attributeChanged: function(attr, oldVal, curVal) {
+        if (attr === 'currTime') {
+          this.currTimeChanged(curVal);
+        }
+      },
+ 	
+      currTimeChanged: function(currTime) {
+        if (this.currTime > 0) {
+          this.parentElement.children[0].impl.setAttribute('currTime', this.currTime);
+	this.$.container.children[0].impl.currentTime=this.currTime;
+        } 
+      }
+    
+   
+	
+	
+    
+});
+ </script>
+</polymer-element>
+
+

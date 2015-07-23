@@ -1,0 +1,775 @@
+<link rel="import" href="components/polymer/polymer.html">
+<link rel="import" href="video-audio.html">
+<link rel="import" href="media-query.html">
+<polymer-element name="x-control"  >
+
+
+<template>
+
+<style>
+
+
+.a{	 
+	float: left;
+	z-index:1;
+	background: #535353;
+	-moz-border-radious-topleft:5px;
+	-moz-border-radious-topright:5px;
+	-moz-border-radious-bottomtight:5px;
+	-moz-border-radious-bottomleft:5px;
+	-webkit-border-radius: 5px;
+	width: 640px;
+	height: 30px;
+	
+
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+
+.b{
+	float: left;
+	z-index:1;
+	background: #535353;
+	-moz-border-radious-topleft:50px;
+	-moz-border-radious-topright:50px;
+	-moz-border-radious-bottomtight:50px;
+	-moz-border-radious-bottomleft:50px;
+	-webkit-border-radius: 400px;
+	width: 1000px;
+	height: 150px;
+	
+	position: absolute;
+  	top: 50%;
+  	left: 50%;
+
+	margin-top: -100px;
+	margin-left: -500px;
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+
+
+}
+
+
+
+.play{
+	z-index:5;
+	display: block;
+	width: 30px;
+	height: 30px;
+	margin-left: 10px;
+	
+	background: url(play.png) no-repeat;
+	
+	opacity: 1;
+
+	
+}
+
+.play1{
+	z-index:5;
+	display: block;
+	width: 128px;
+	height: 128px;
+	margin-left: 10px;
+	
+	background: url(play1.png) no-repeat;
+	
+	opacity: 1;
+}
+.play2{
+	z-index:5;
+	display: block;
+	width: 80px;
+	height: 80px;
+	margin-left: 30px;
+	margin-top:-60px;
+	background: url(play2.png) no-repeat;
+	
+	opacity: 1;
+}
+.pause{
+	z-index:5;
+	display: block;
+	width: 30px;
+	height: 30px;
+	margin-left: 10px;
+
+	background: url(pause.png) no-repeat;
+	
+	opacity: 1;
+}
+.pause1{
+	z-index:5;
+	display: block;
+	width: 128px;
+	height: 128px;
+	margin-left: 10px;
+
+	background: url(pause1.png) no-repeat;
+	
+	opacity: 1;
+}
+.pause2{
+	z-index:5;
+	display: block;
+	width: 80px;
+	height: 80px;
+	margin-left: 30px;
+	margin-top:-60px;
+
+	background: url(pause2.png) no-repeat;
+	
+	opacity: 1;
+}
+.mute{
+	z-index:5;
+	display: block;
+	width: 30px;
+	height: 30px;
+	margin-left: 10px;
+
+	background: url(mute.png) no-repeat;
+
+	opacity: 1;
+}
+.mute1{
+	z-index:5;
+	display: block;
+	width: 128px;
+	height: 128px;
+	margin-left: 10px;
+	
+	background: url(mute1.png) no-repeat;
+
+	opacity: 1;
+}
+.mute2{
+	z-index:5;
+	display: block;
+	width: 80px;
+	height: 80px;
+	margin-left: -300px;
+	margin-top:60px;
+	
+	background: url(mute2.png) no-repeat;
+
+	opacity: 1;
+}
+.sound{
+	z-index:5;
+	display: block;
+	width: 30px;
+	height: 30px;
+	margin-left: 10px;
+
+	background: url(sound.png) no-repeat;
+	
+	opacity: 1;
+}
+.sound1{
+	z-index:5;
+	display: block;
+	width: 128px;
+	height: 128px;
+	margin-left: 10px;
+	margin-top:0px;
+
+	background: url(sound1.png) no-repeat;
+	
+	opacity: 1;
+}
+.sound2{
+	z-index:5;
+	display: block;
+	width: 80px;
+	height: 80px;
+	margin-left: -300px;
+	margin-top:60px;
+
+	background: url(sound2.png) no-repeat;
+	
+	opacity: 1;
+}
+ #timeline  {
+	
+		-webkit-appearance: none;
+		border-radius: 50px;
+		box-shadow: inset 0 0 5px #333;
+		background-color: #999;
+		height: 10px;
+		vertical-align: middle;
+		margin-top:-1px;
+		
+		width:360px;
+	}
+#volbar  {
+	
+		-webkit-appearance: none;
+		border-radius: 50px;
+		box-shadow: inset 0 0 5px #333;
+		background-color: #999;
+		height: 10px;
+		vertical-align: middle;
+		margin-top:-1px;
+		
+		width:100px;
+	}
+.slider ::-moz-range-track {
+		-moz-appearance: none;
+		border-radius: 5px;
+		box-shadow: inset 0 0 5px #333;
+		background-color: #999;
+		height: 10px;
+		
+	}
+.slider	::-webkit-slider-thumb {
+		-webkit-appearance: none !important;
+		border-radius: 20px;
+		background-color: #FFF;
+		box-shadow:inset 0 0 10px rgba(000,000,000,0.5);
+		border: 1px solid #999;
+		height: 15px;
+		width: 15px;
+	}
+.slider::-moz-range-thumb {
+		-moz-appearance: none;
+		border-radius: 20px;
+		background-color: #FFF;
+		box-shadow:inset 0 0 10px rgba(000,000,000,0.5);
+		border: 1px solid #999;
+		height: 15px;
+		width: 15px;
+	}
+.slider1 ::-moz-range-track {
+		-moz-appearance: none;
+		border-radius: 5px;
+		box-shadow: inset 0 0 5px #333;
+		background-color: #999;
+		height: 10px;
+		
+	}
+.slider1	::-webkit-slider-thumb {
+		-webkit-appearance: none !important;
+		border-radius: 20px;
+		background-color: #FFF;
+		box-shadow:inset 0 0 10px rgba(000,000,000,0.5);
+		border: 1px solid #999;
+		height: 30px;
+		width: 30px;
+	}
+.slider1::-moz-range-thumb {
+		-moz-appearance: none;
+		border-radius: 20px;
+		background-color: #FFF;
+		box-shadow:inset 0 0 10px rgba(000,000,000,0.5);
+		border: 1px solid #999;
+		height: 15px;
+		width: 15px;
+	}
+.slider2 ::-moz-range-track {
+		-moz-appearance: none;
+		border-radius: 5px;
+		box-shadow: inset 0 0 5px #333;
+		background-color: #999;
+		height: 10px;
+		
+	}
+.slider2 ::-webkit-slider-thumb {
+		-webkit-appearance: none !important;
+		border-radius: 20px;
+		background-color: #FFF;
+		box-shadow:inset 0 0 10px rgba(000,000,000,0.5);
+		border: 1px solid #999;
+		height: 20px;
+		width: 20px;
+	}
+.slider2 ::-moz-range-thumb {
+		-moz-appearance: none;
+		border-radius: 20px;
+		background-color: #FFF;
+		box-shadow:inset 0 0 10px rgba(000,000,000,0.5);
+		border: 1px solid #999;
+		height: 15px;
+		width: 15px;
+	}
+
+
+
+
+</style>
+<media-query  query="{{query}}" queryMatches="{{qMatches}}"></media-query>
+<content></content>
+
+<div id="box" class="a"> 
+
+<div><a id="playbutton" on-click={{PlayPause}}/ ></a></div>
+<div class="slider"><input  id="timeline" type="range" min="0" max="200" value="5" step="1" on-change={{timeslider}}/></input></div>
+
+<div style="margin-left:10px;  font-family: Arial, Helvetica, sans-serif;font-size: 13px;font-weight: bold;font-style: normal;color: white;" id="curTime" title="Current time"></div>
+
+<div><a id="soundbutton"  on-click={{Mute}}/></a></div>
+
+<div class="slider"><input id="volbar" type="range" min="0" max="10" value="5" step="1"  on-change={{volslider}}/></input></div>
+
+
+
+</div>
+
+
+
+
+</template>
+
+ <script>
+ Polymer('x-control',{
+	id:'',
+	l:'',
+	query:['(max-width: 1500px) and (min-width: 1220px)','(max-width: 1219px) and (min-width: 1000px)','(max-width: 999px) and (min-width: 800px)','(max-width: 799px) and (min-width: 600px)','(max-width: 599px) and (min-width: 300px)'],
+	
+	ready: function(l) {
+	  if(document.querySelector('x-media')!=null){
+
+		  this.$.box.className="a";
+		 this.$.box.children[0].children[0].className="play";
+	         this.$.box.children[3].children[0].className="sound";
+
+		  a=this.query;
+		  this.id=this.children[0];
+		  var scope=this;
+		  this.parentElement.children[0].attributes[1]=this.start_time;
+		  document/*.querySelector('x-media')*/.addEventListener('length', function(e) {
+			   	  	
+			scope.l=event.detail;
+		
+			document./*querySelector('x-media').*/addEventListener('time', function(e) {
+			
+				timeline.value=(event.detail.time*timeline.max)/scope.l;	
+			
+				if(event.detail.time==scope.l)/*this.parentElement.$.*/playbutton.className='play';
+
+				var sec_num = parseInt(event.detail.time, 10); 
+	    			var hours   = Math.floor(sec_num / 3600);
+	    			var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+	    			var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+	    			if (hours   < 10) {hours   = "0"+hours;}
+	    			if (minutes < 10) {minutes = "0"+minutes;}
+	    			if (seconds < 10) {seconds = "0"+seconds;}
+	    			var time    = hours+':'+minutes+':'+seconds;
+			
+				/*this.parentElement.$.*/curTime.textContent = time;
+		     		
+				
+			});
+		  });
+		  scope.addEventListener('core-media-change', function(e) {
+		
+			if(e.detail.media===a[0] && e.detail.matches===true)
+			{
+			
+				this.$.box.style.width='1280px';
+				this.$.box.children[1].children[0].style.width='850px';
+				this.$.box.children[4].children[0].style.width='200px';
+				this.$.box.children[2].style.fontSize='13px';
+				this.$.box.children[2].style.marginTop='0px';
+			
+			}
+			if(e.detail.media===a[1] && e.detail.matches===true)
+			{
+			
+				this.$.box.style.width='1190px';
+				this.$.box.children[1].children[0].style.width='800px';
+				this.$.box.children[4].children[0].style.width='160px';
+				this.$.box.children[2].style.fontSize='13px';
+		
+			
+			}
+			if(e.detail.media===a[2] && e.detail.matches===true)
+			{
+			
+				this.$.box.style.width='800px';
+			
+				this.$.box.children[1].children[0].style.width='500px';
+				this.$.box.children[4].children[0].style.width='100px';
+				this.$.box.children[2].style.fontSize='12px';
+			}
+
+			if(e.detail.media===a[3] && e.detail.matches===true)
+			{
+			
+				this.$.box.style.width='500px';
+			
+				this.$.box.children[1].children[0].style.width='260px';
+				this.$.box.children[4].children[0].style.width='80px';
+				this.$.box.children[2].style.fontSize='12px';
+			}
+
+
+
+			if(e.detail.media===a[4] && e.detail.matches===true)
+			{
+			
+				this.$.box.style.width='300px';
+			
+				this.$.box.children[1].children[0].style.width='100px';
+				this.$.box.children[4].children[0].style.width='50px';
+				this.$.box.children[2].style.fontSize='10px';
+			
+			}
+	
+	    	 });
+		}
+		else{
+		  this.$.box.className="b";
+		  this.$.box.children[0].children[0].className="pause1";
+	          this.$.box.children[3].children[0].className="sound1";
+		 
+		  a=this.query;
+		  this.id=this.children[0];
+		  var scope=this;
+		  this.parentElement.children[0].attributes[1]=this.start_time;
+		  document/*.querySelector('x-media')*/.addEventListener('length', function(e) {
+			   	  	
+			scope.l=event.detail;
+		
+			document./*querySelector('x-media').*/addEventListener('time', function(e) {
+			
+				timeline.value=(event.detail.time*timeline.max)/scope.l;	
+			
+				if(event.detail.time==scope.l)/*this.parentElement.$.*/playbutton.className='play';
+
+				var sec_num = parseInt(event.detail.time, 10); 
+	    			var hours   = Math.floor(sec_num / 3600);
+	    			var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+	    			var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+	    			if (hours   < 10) {hours   = "0"+hours;}
+	    			if (minutes < 10) {minutes = "0"+minutes;}
+	    			if (seconds < 10) {seconds = "0"+seconds;}
+	    			var time    = hours+':'+minutes+':'+seconds;
+			
+				/*this.parentElement.$.*/curTime.textContent = time;
+		     		
+				if(/*this.parentElement.$.*/soundbutton.className==='sound')
+				/*this.parentElement.$.*/volbar.value=event.detail.vol*/*this.parentElement.$.*/volbar.max;
+			});
+		  });
+
+
+
+		  scope.addEventListener('core-media-change', function(e) {
+		
+			if(e.detail.media===a[0] && e.detail.matches===true)
+			{
+							
+				this.$.box.style.width='1000px';
+				this.$.box.style.height='150px';
+				this.$.box.style.marginLeft='-500px';
+				
+				if(this.$.box.children[0].children[0].className=="play2")
+					this.$.box.children[0].children[0].className="play1";
+				else if(this.$.box.children[0].children[0].className=="pause2")
+					this.$.box.children[0].children[0].className="pause1";
+				
+				if(this.$.box.children[3].children[0].className=="sound2")
+					this.$.box.children[3].children[0].className="sound1";
+				else if(this.$.box.children[3].children[0].className=="mute2") 
+					this.$.box.children[3].children[0].className="mute1";				
+
+		  		this.$.box.children[1].children[0].style.height="25px";
+		  		this.$.box.children[1].children[0].style.width="400px";
+				this.$.box.children[1].children[0].style.marginTop="0px";
+				this.$.box.children[1].children[0].style.marginLeft="10px";
+				this.$.box.children[1].className="slider1";
+
+				this.$.box.children[2].style.fontSize="20px";
+				this.$.box.children[2].style.marginTop='0px';
+
+				this.$.box.children[3].children[0].style.marginLeft="10px";
+				this.$.box.children[3].children[0].style.marginTop="0px";
+
+		  		this.$.box.children[4].children[0].style.height="25px";
+		  		this.$.box.children[4].children[0].style.width="150px";
+				this.$.box.children[4].children[0].style.marginLeft="0px";
+				this.$.box.children[4].children[0].style.marginTop="0px";
+				this.$.box.children[4].className="slider1";		
+			}
+			if(e.detail.media===a[1] && e.detail.matches===true)
+			{
+			
+				this.$.box.style.width='1000px';
+				this.$.box.style.height='150px';
+				this.$.box.style.marginLeft='-500px';
+
+				if(this.$.box.children[0].children[0].className=="play2")
+					this.$.box.children[0].children[0].className="play1";
+				else if(this.$.box.children[0].children[0].className=="pause2")
+					this.$.box.children[0].children[0].className="pause1";
+				
+				if(this.$.box.children[3].children[0].className=="sound2")
+					this.$.box.children[3].children[0].className="sound1";
+				else if(this.$.box.children[3].children[0].className=="mute2") 
+					this.$.box.children[3].children[0].className="mute1";
+
+				this.$.box.children[1].children[0].style.width="400px";
+		  		this.$.box.children[1].children[0].style.height="25px";
+				this.$.box.children[1].children[0].style.marginTop="0px";
+				this.$.box.children[1].children[0].style.marginLeft="10px";
+				this.$.box.children[1].className="slider1";
+
+				this.$.box.children[2].style.fontSize="20px";
+				this.$.box.children[2].style.marginTop='0px';
+				
+				this.$.box.children[3].children[0].style.marginLeft="10px";
+				this.$.box.children[3].children[0].style.marginTop="0px";
+		  		
+		  		this.$.box.children[4].children[0].style.height="25px";
+		  		this.$.box.children[4].children[0].style.width="150px";
+				this.$.box.children[4].children[0].style.marginLeft="0px";
+				this.$.box.children[4].children[0].style.marginTop="0px";
+				this.$.box.children[4].className="slider1";
+			}
+			if(e.detail.media===a[2] && e.detail.matches===true)
+			{
+				
+				this.$.box.style.width='780px';
+				this.$.box.style.height='150px';
+				this.$.box.style.marginLeft='-390px';
+	
+				if(this.$.box.children[0].children[0].className=="play2")
+					this.$.box.children[0].children[0].className="play1";
+				else if(this.$.box.children[0].children[0].className=="pause2")
+					this.$.box.children[0].children[0].className="pause1";
+				
+				if(this.$.box.children[3].children[0].className=="sound2")
+					this.$.box.children[3].children[0].className="sound1";
+				else if(this.$.box.children[3].children[0].className=="mute2") 
+					this.$.box.children[3].children[0].className="mute1";
+
+		  		this.$.box.children[1].children[0].style.height="25px";
+		  		this.$.box.children[1].children[0].style.width="300px";
+				this.$.box.children[1].children[0].style.marginTop="0px";
+				this.$.box.children[1].children[0].style.marginLeft="10px";
+				this.$.box.children[1].className="slider1";
+
+				this.$.box.children[2].style.fontSize="20px";
+				this.$.box.children[2].style.marginTop='0px';
+				
+				this.$.box.children[3].children[0].style.marginLeft="10px";
+				this.$.box.children[3].children[0].style.marginTop="0px";
+
+		  		this.$.box.children[4].children[0].style.height="25px";
+		  		this.$.box.children[4].children[0].style.width="90px";
+				this.$.box.children[4].children[0].style.marginLeft="0px";
+				this.$.box.children[4].children[0].style.marginTop="0px";
+				this.$.box.children[4].className="slider1";
+				
+			}
+
+			if(e.detail.media===a[3] && e.detail.matches===true)
+			{
+			
+				this.$.box.style.width='500px';
+				this.$.box.style.height='150px';
+				this.$.box.style.marginLeft='-250px';
+
+				if(this.$.box.children[0].children[0].className=="play1")
+					this.$.box.children[0].children[0].className="play2";
+				else if(this.$.box.children[0].children[0].className=="pause1")
+					this.$.box.children[0].children[0].className="pause2";
+				
+				if(this.$.box.children[3].children[0].className=="sound1")
+					this.$.box.children[3].children[0].className="sound2";
+				else if(this.$.box.children[3].children[0].className=="mute1")
+					this.$.box.children[3].children[0].className="mute2";
+
+				this.$.box.children[1].children[0].style.width='260px';
+				this.$.box.children[1].children[0].style.height="15px";
+		  		this.$.box.children[1].children[0].style.marginTop="-60px";
+				this.$.box.children[1].children[0].style.marginLeft="15px";
+				this.$.box.children[1].className="slider2";
+
+				this.$.box.children[2].style.fontSize='15px';
+				this.$.box.children[2].style.marginTop='-60px';
+				this.$.box.children[2].style.marginLeft='15px';
+
+				this.$.box.children[3].children[0].style.marginLeft="-300px";
+				this.$.box.children[3].children[0].style.marginTop="60px";	
+				
+				this.$.box.children[4].children[0].style.marginTop="60px";
+				this.$.box.children[4].children[0].style.marginLeft="-200px";
+				this.$.box.children[4].children[0].style.height="15px";
+				this.$.box.children[4].children[0].style.width='80px';
+				this.$.box.children[4].className="slider2";
+			}
+
+			if(e.detail.media===a[4] && e.detail.matches===true)
+			{
+			
+				this.$.box.style.width='300px';
+				this.$.box.style.marginLeft='-150px';
+				
+				if(this.$.box.children[0].children[0].className=="play1")
+					this.$.box.children[0].children[0].className="play2";
+				else if(this.$.box.children[0].children[0].className=="pause1")
+					this.$.box.children[0].children[0].className="pause2";
+				
+				if(this.$.box.children[3].children[0].className=="sound1")
+					this.$.box.children[3].children[0].className="sound2";
+				else if(this.$.box.children[3].children[0].className=="mute1")
+					this.$.box.children[3].children[0].className="mute2";
+
+				this.$.box.children[1].children[0].style.width='100px';
+				this.$.box.children[1].children[0].style.height="15px";
+		  		this.$.box.children[1].children[0].style.marginTop="-60px";
+				this.$.box.children[1].children[0].style.marginLeft="10px";
+				this.$.box.children[1].className="slider2";
+
+				this.$.box.children[2].style.fontSize='13px';
+				this.$.box.children[2].style.marginTop='-60px';
+				this.$.box.children[2].style.marginLeft='10px';
+
+				this.$.box.children[3].children[0].style.marginLeft="-200px";
+				this.$.box.children[3].children[0].style.marginTop="70px";				
+				
+				this.$.box.children[4].children[0].style.marginTop="60px";
+				this.$.box.children[4].children[0].style.marginLeft="-120px";
+				this.$.box.children[4].children[0].style.height="15px";
+				this.$.box.children[4].children[0].style.width='50px';
+				this.$.box.children[4].className="slider2";
+			}
+	
+	    	 });	
+
+		}	
+		 
+	
+        },
+	
+	timeslider:function(){
+	   var value=this.$.timeline.value;
+	   var m=this.$.timeline.max;
+	   this.fire('timeChange',{'value':value,'maxtime':m});
+	},
+	
+	volslider:function(){
+	   var value=this.$.volbar.value;
+	   var m=this.$.volbar.max;
+	   this.fire('volChange',{'value':value,'maxvol':m});
+	   if(document.querySelector('x-media')!=null)
+	   {
+		   if(this.$.volbar.value=='0' && this.$.soundbutton.className=='sound' )
+		   {
+			this.$.soundbutton.className='mute';
+			this.fire('Mute');
+		   }
+		   else if(this.$.volbar.value!='0' && this.$.soundbutton.className=='mute')
+		   {
+			this.$.soundbutton.className='sound';
+			this.fire('Mute');
+		   }
+	    }
+	    else{
+		if(this.$.volbar.value=='0' && this.$.soundbutton.className=='sound1' )
+		   {
+			this.$.soundbutton.className='mute1';
+			this.fire('Mute');
+		   }
+		   else if(this.$.volbar.value!='0' && this.$.soundbutton.className=='mute1')
+		   {
+			this.$.soundbutton.className='sound1';
+			this.fire('Mute');
+		   }
+		   else if(this.$.volbar.value=='0' && this.$.soundbutton.className=='sound2' )
+		   {
+			this.$.soundbutton.className='mute2';
+			this.fire('Mute');
+		   }
+		   else if(this.$.volbar.value!='0' && this.$.soundbutton.className=='mute2')
+		   {
+			this.$.soundbutton.className='sound2';
+			this.fire('Mute');
+		   }
+	    }
+	},
+	
+	PlayPause: function() {
+	  this.fire('PlayPause');
+	  if(document.querySelector('x-media')!=null)
+	  {
+		  if (this.$.playbutton.className=='play' ){
+		    this.$.playbutton.className='pause';
+		  }
+		  else{  
+		    this.$.playbutton.className='play';
+		  }
+	  }
+	  else{
+
+		if (this.$.playbutton.className=='play1' ){
+		    this.$.playbutton.className='pause1';
+		  }
+		  else if (this.$.playbutton.className=='pause1' ){  
+		    this.$.playbutton.className='play1';
+		  }
+		  else if (this.$.playbutton.className=='play2' ){
+		    this.$.playbutton.className='pause2';
+		  }
+		  else if (this.$.playbutton.className=='pause2' ){  
+		    this.$.playbutton.className='play2';
+		  }
+	  }
+ 	},
+
+	Mute:function(id){
+
+	  if(document.querySelector('x-media')!=null)
+	  {
+		  if (this.$.soundbutton.className=='sound' && this.$.volbar.value!='0'){
+		    this.fire('Mute');
+		    this.$.soundbutton.className='mute';
+		    this.$.volbar.value='0';
+		  }
+		  else if( this.$.soundbutton.className=='mute' && this.$.volbar.value!='0') {  
+		    	 this.fire('Mute');
+			this.$.soundbutton.className='sound';
+		  }
+	  }
+	  else{
+		if (this.$.soundbutton.className=='sound1' && this.$.volbar.value!='0'){
+		  	
+		  	this.fire('Mute');
+		    	this.$.soundbutton.className='mute1';
+		    	this.$.volbar.value='0';
+		  }
+		  else if( this.$.soundbutton.className=='mute1' && this.$.volbar.value!='0') {  
+		    	
+		  	this.fire('Mute');
+			this.$.soundbutton.className='sound1';
+		  }	  	
+		  else if (this.$.soundbutton.className=='sound2' && this.$.volbar.value!='0'){
+		  	
+		  	this.fire('Mute');
+		    	this.$.soundbutton.className='mute2';
+		    	this.$.volbar.value='0';
+		  }
+		  else if( this.$.soundbutton.className=='mute2' && this.$.volbar.value!='0') {  
+		    	
+		  	this.fire('Mute');
+			this.$.soundbutton.className='sound2';
+		  }	  	
+	  }	  		
+        }
+    
+    
+});
+ </script>
+</polymer-element>
+
+

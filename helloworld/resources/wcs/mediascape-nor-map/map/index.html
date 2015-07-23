@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Map</title>
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="js/leaflet/leaflet.css" />
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+        html,
+        body,
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+
+    <!-- Import Motion -->
+    <script type="text/javascript" src="http://www.mcorp.no/lib/msv-2.0.js"></script>
+
+    <!-- MCorp -->
+    <script type="text/javascript" src="http://www.mcorp.no/lib/mcorp-2.0.js"></script>
+    <script type="text/javascript" src="http://www.mcorp.no/lib/magic-2.0.js"></script>
+</head>
+
+<body>
+    <div id="map"></div>
+
+    <script src="js/stations.js"></script>
+    <script src="js/holmenkollbanen_geoJSON.js"></script>
+    <script src="js/train_gps_timeseries.js"></script>
+    <script src="js/leaflet/leaflet.js"></script>
+    <script src="js/holmenkollbanen_offline.js"></script>
+
+    <script type="text/javascript">
+        var app = MCorp.app("4897528703504378478", {anon:true});
+        var map;
+        var policy = function (msv) {
+            return (msv.vel > 1) ? 50 : 500;
+        };
+        app.run = function () {
+            map = makeHolmenkollbanenMap(dataset,
+                app.msvs.shared, {
+                    policy: policy
+                });
+        };
+        window.onload = app.init;
+    </script>
+</body>
+
+</html>
+
+

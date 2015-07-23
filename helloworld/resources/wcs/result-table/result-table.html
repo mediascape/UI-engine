@@ -1,0 +1,564 @@
+
+<link rel="import" href="../polymer/core-ajax/core-ajax.html">
+
+<polymer-element name="result-table" attributes="timestamp" extends='component-query'>
+
+<template>
+<style>
+:host {
+    display: block;
+    background-color: white;
+  }
+   body{
+    background-color: white;
+  }
+table {    
+
+    margin-left: 10%;
+    width: 80%;
+    background: #fff;
+    font-family:RobotoDraft, Helvetica Neue, Helvetica, Arial;
+}
+td, th {
+    
+    border: 1px solid #999999;
+}
+
+th {
+
+    background-color: #3399FF;
+    
+    color: #fff;
+    white-space: nowrap;
+}
+tbody th {
+	background-color: #3399FF;
+	border: 1px solid #999999;
+}
+tbody tr:nth-child(2n-1) {
+    background-color: #f5f5f5;
+    transition: all .125s ease-in-out;
+}
+tbody tr:hover {
+    background-color: rgba(129,200,200,.3);
+}
+
+
+#placeSelection{
+	font-size: 20px;	
+    border-radius: 6px;
+    margin-bottom: 10px;  
+    
+    background-color: white;
+    font-family:RobotoDraft, "Helvetica Neue", Helvetica, Arial;
+}
+#container{
+    height:100%;
+    margin-top:0%;
+    background-color: white;
+    border:solid 1px;
+  }
+
+input{
+	width:30%;
+	height:40px;
+	border-radius: 6px;
+	margin-bottom: 10px; 
+	font-family:RobotoDraft, "Helvetica Neue", Helvetica, Arial;
+
+}
+@media(max-width:340px){
+			#resultsTab{display:none;}
+ 			#resultsTab_horizontal{display:none;}
+ 			#resultsTab_pip{display:block;}
+
+ 			#placeSelection{font-size:15px;}
+	    	#counting{font-size:15px;}
+	    	input{height:20px;}
+}
+@media (min-width:341px) and (max-width:450px){
+	    	#resultsTab{font-size:8px;display:block;}
+	    	#resultsTab_horizontal{font-size:10px;display:none}
+		
+ 		#resultsTab_pip{display:none;}
+	    	#placeSelection{font-size:9px;}
+	    	#counting{font-size:10px;}
+	    	input{height:30px;}
+	    	.imgClass{width:30px;}    	
+	    	
+
+}
+@media (min-width:451px) and (max-width:600px){
+	    	#resultsTab{font-size:8px;}
+	    	#resultsTab_horizontal{font-size:10px;}
+	    	#placeSelection{font-size:10px;}
+	    	#counting{font-size:10px;}
+	    	input{height:30px;}
+	    	.imgClass{width:30px;}    	
+	    	
+
+}
+@media (min-width:601px) and (max-width:800px){
+	    	
+	    	#placeSelection{font-size:15px;}
+	    	#counting{font-size:15px;}
+	    	input{height:40px;}
+	    	.imgClass{width:40px;}
+}
+@media (min-width:801px) {
+	    	#resultsTab{font-size:20px;}
+	    	#placeSelection{font-size:20px;}
+	    	#counting{font-size:20px;}
+	    	input{height:40px;}
+	    	.imgClass{width:40px;}
+}
+ @media (min-width:1000px) and (min-aspect-ratio:8/1){
+ 			#resultsTab{display:none;font-size:15px;}
+ 			#resultsTab_horizontal{display:block;}
+ 			#resultsTab_pip{display:none;}
+ 			#placeSelection{font-size:15px;}
+	    	#counting{font-size:15px;}
+	    	input{height:20px;}
+	    	
+ }
+ @media (min-width:1000px) and (min-aspect-ratio:9/1){
+ 			#resultsTab{display:none;font-size:15px;}
+ 			#resultsTab_horizontal{display:block;}
+ 			#resultsTab_pip{display:none;}
+ 			#placeSelection{font-size:15px;}
+	    	#counting{font-size:15px;}
+	    	input{height:20px;}
+	    	
+ }
+  @media (min-width:1000px) and (min-aspect-ratio:17/13){
+  			#resultsTab{display:block;}
+ 			#resultsTab_horizontal{display:none;}
+ 			#resultsTab_pip{display:none;}
+ 			#placeSelection{font-size:15px;}
+	    	#counting{font-size:15px;}
+	    	input{height:40px;}
+  }
+  @media (min-width:1000px) and (min-aspect-ratio:13/9){
+  			#resultsTab{display:block;}
+ 			#resultsTab_horizontal{display:none;}
+ 			#resultsTab_pip{display:none;}
+ 			#placeSelection{font-size:15px;}
+	    	#counting{font-size:15px;}
+	    	input{height:40px;}
+  }
+  
+
+
+</style>
+<div id='container' >
+<core-ajax id="data" auto url="2015.json" handleAs="json" response="{{response}}"></core-ajax>
+<div id='selectDiv' style='margin-top:2px;text-align:center;font-family:RobotoDraft, "Helvetica Neue", Helvetica, Arial;color:green;'>
+<select id="placeSelection" value='{{value}}'>
+	
+  <option value="donostia">Donostia</option>
+  <option value="bilbo">Bilbo</option>
+  <option value="gasteiz">Gasteiz</option>
+  <option value="irunea">Irunea</option>
+  <option value="gipuzkoa">Gipuzkoa</option>
+  <option value="bizkaia">Bizkaia</option>
+  <option value="araba">Araba</option>
+  <option value="nafarroa">Nafarroa</option>
+</select>
+<span id='counting'></span>
+</span>
+
+<div style='text-align:center;'>
+<input id='actualdata' type='button' value='2015' style='background-color:#3399FF;border-color:#3399FF;color:white' ></input>
+<input id='pastdata' type='button' value='2011' style='background-color:#ADD8E6;border-color:#ADD8E6;color:#3399FF' ></input>
+</div>
+</div>
+</template>
+<script>
+Polymer({
+
+	
+    resultsData:{},
+    time:'',
+    where:'',
+   	actualShowing:true,
+  
+   	prevTime:1432509468,
+	ready:function(){
+		document.addEventListener ('motion-ready',this.smReady.bind(this));
+
+		var scope=this;
+		Polymer.addEventListener(this.$.actualdata,'tap',function(){
+			scope.actualData();
+		});
+		Polymer.addEventListener(this.$.pastdata,'tap',function(){
+			scope.pastData();
+		});
+		
+		resultsData={};
+		this.$.data.addEventListener("core-response",function(e){
+			resultsData=e.detail.response;
+
+			
+			for(var i=1;i<resultsData.results.length;i++){
+				if(scope.timestamp===resultsData.results[i].time){
+					time=i;
+				}
+			}
+			where=0;		
+			time=1;	
+			var shape=1;
+			scope.drawTable(resultsData,time,where,shape);
+			
+		});
+			
+			
+	},
+	smReady:function(){
+  		// Sharemotion objetua lortu
+  		var _this=this;
+   		this.sm = mediascape.Communication.sharedmotion();
+  		// ebentuak entzun ta jaso
+  		var handler = function (e) {
+      		_this.timestamp=1432509468+Math.round(e.pos);
+      		
+      		
+      	};
+    	this.sm.mapp.motions.shared.on("timeupdate", handler);
+	},
+	actualData:function(){
+		this.$.pastdata.style.backgroundColor='#ADD8E6';
+		this.$.pastdata.style.color='#3399FF';
+		this.$.pastdata.style.borderColor='#ADD8E6';
+		this.$.actualdata.style.backgroundColor='#3399FF';
+		this.$.actualdata.style.color='white';
+		this.$.actualdata.style.borderColor='#3399FF';
+		this.actualShowing=true;
+
+		var shape=0;
+
+		if(this.shadowRoot.children[1].querySelector('#resultsTab').style.display==='block'){
+			shape=1;
+		}
+		else if(this.shadowRoot.children[1].querySelector('#resultsTab_horizontal').style.display==='block'){
+			shape=2;
+		}
+		else if(this.shadowRoot.children[1].querySelector('#resultsTab_pip').style.display==='block'){
+			shape=3;
+		}
+		
+		this.shadowRoot.children[1].removeChild(this.shadowRoot.children[1].querySelector('#resultsTab'));
+		this.shadowRoot.children[1].removeChild(this.shadowRoot.children[1].querySelector('#resultsTab_horizontal'));
+		this.shadowRoot.children[1].removeChild(this.shadowRoot.children[1].querySelector('#resultsTab_pip'));
+		this.drawTable(resultsData,time,where,shape);
+
+	},
+	pastData:function(){
+		this.$.actualdata.style.backgroundColor='#ADD8E6';
+		this.$.actualdata.style.color='#3399FF';
+		this.$.actualdata.style.borderColor='#ADD8E6';
+		this.$.pastdata.style.backgroundColor='#3399FF';
+		this.$.pastdata.style.color='white';
+		this.$.pastdata.style.borderColor='#3399FF';
+
+		var shape=0;
+
+		if(this.shadowRoot.children[1].querySelector('#resultsTab').style.display==='block'){
+			shape=1;
+		}
+		else if(this.shadowRoot.children[1].querySelector('#resultsTab_horizontal').style.display==='block'){
+			shape=2;
+		}
+		else if(this.shadowRoot.children[1].querySelector('#resultsTab_pip').style.display==='block'){
+			shape=3;
+		}
+
+
+		this.shadowRoot.children[1].removeChild(this.shadowRoot.children[1].querySelector('#resultsTab'));
+		this.shadowRoot.children[1].removeChild(this.shadowRoot.children[1].querySelector('#resultsTab_horizontal'));
+		this.shadowRoot.children[1].removeChild(this.shadowRoot.children[1].querySelector('#resultsTab_pip'));
+		time=0;
+		this.actualShowing=false;						
+		this.drawTable(resultsData,time,where,shape);
+
+	},
+	timestampChanged:function(){
+		
+		var interval=180;
+		var prev=time;
+		if(resultsData.results!==undefined){
+		var nextTs=false;	
+			for(var i=1;i<resultsData.results.length;i++){
+					if(this.timestamp===parseInt(resultsData.results[i].time))
+					{
+						
+						time=i;
+						nextTs=true;
+					}
+					
+			}
+			if(nextTs===false){
+				for(var i=1;i<resultsData.results.length;i++){
+					if(this.timestamp>parseInt(resultsData.results[i].time) && this.timestamp<parseInt(resultsData.results[i+1].time)){
+						time=i;
+						
+					}
+				}
+			}
+			
+			if(prev!=time){
+				if(this.actualShowing===true){
+
+					var shape=0;
+
+					if(this.shadowRoot.children[1].querySelector('#resultsTab').style.display==='block'){
+						shape=1;
+					}
+					else if(this.shadowRoot.children[1].querySelector('#resultsTab_horizontal').style.display==='block'){
+						shape=2;
+					}
+					else if(this.shadowRoot.children[1].querySelector('#resultsTab_pip').style.display==='block'){
+			shape=3;
+		}
+
+					this.shadowRoot.children[1].removeChild(this.shadowRoot.children[1].querySelector('#resultsTab'));	
+					this.shadowRoot.children[1].removeChild(this.shadowRoot.children[1].querySelector('#resultsTab_horizontal'));
+					this.shadowRoot.children[1].removeChild(this.shadowRoot.children[1].querySelector('#resultsTab_pip'));					
+					this.drawTable(resultsData,time,where,shape);
+				}
+				this.prevTime=this.timestamp;
+			}
+			
+			
+		}
+	},
+
+	valueChanged:function(){
+		
+		
+		var x=this.$.placeSelection;
+		if (x.value==='donostia') where=0;
+		else if(x.value==='bilbo') where=1;
+		else if(x.value==='gasteiz') where =2;
+		else if(x.value==='irunea') where=3;
+		else if(x.value==='gipuzkoa') where=4;
+		else if(x.value==='bizkaia') where=5;
+		else if(x.value==='araba') where =6;
+		else if(x.value==='nafarroa') where=7;
+		var shape=0;
+
+		if(this.shadowRoot.children[1].querySelector('#resultsTab').style.display==='block'){
+			shape=1;
+		}
+		else if(this.shadowRoot.children[1].querySelector('#resultsTab_horizontal').style.display==='block'){
+			shape=2;
+		}
+		else if(this.shadowRoot.children[1].querySelector('#resultsTab_pip').style.display==='block'){
+			shape=3;
+		}
+		this.shadowRoot.children[1].removeChild(this.shadowRoot.children[1].querySelector('#resultsTab'));
+		this.shadowRoot.children[1].removeChild(this.shadowRoot.children[1].querySelector('#resultsTab_horizontal'));
+		this.shadowRoot.children[1].removeChild(this.shadowRoot.children[1].querySelector('#resultsTab_pip'));
+		this.drawTable(resultsData,time,where,shape);
+			
+		
+	},
+	drawTable:function(results,time,where,shape){
+		
+		this.$.counting.innerHTML='Escrutado: '+results.results[time].places[where].counting;
+
+		//first option
+		var table=document.createElement('table');
+		table.style.fontSize=this.$.placeSelection.style.fontSize;
+		table.id='resultsTab';
+		var thead=document.createElement('thead');
+		var trhead=document.createElement('tr');
+
+		var candidatura=document.createElement('th');
+		candidatura.innerHTML="CANDIDATURA";
+		candidatura.style.padding= '0.75em 1em';
+    	candidatura.style.textAlign='left';
+		trhead.appendChild(candidatura);
+
+		var image=document.createElement('th');		
+		trhead.appendChild(image);
+
+		var votos=document.createElement('th');
+		votos.innerHTML="VOTOS";
+		votos.style.padding= '0.75em 1em';
+    	votos.style.textAlign= 'left';
+		trhead.appendChild(votos);
+
+		var porcentaje=document.createElement('th');
+		porcentaje.innerHTML="PORCENTAJE";
+		porcentaje.style.padding= '0.75em 1em';
+    	porcentaje.style.textAlign= 'left';
+		trhead.appendChild(porcentaje);
+
+		var escanios=document.createElement('th');
+		escanios.innerHTML="ESCANIOS";
+		escanios.style.padding= '0.75em 1em';
+    	escanios.style.textAlign= 'left';
+		trhead.appendChild(escanios);
+		thead.appendChild(trhead);
+		table.appendChild(thead);
+
+		var tbody=document.createElement('tbody');
+
+		for(var i=0;i<results.results[time].places[where].parties.length;i++){
+			var tr=document.createElement('tr');
+			var td1=document.createElement('td');
+			td1.innerHTML=results.results[time].places[where].parties[i].name;
+			td1.style.padding= '0.75em 1em';
+    		td1.style.textAlign= 'left';
+			tr.appendChild(td1);
+
+			var tdimg=document.createElement('td');
+			var img=document.createElement('img');
+			img.src="/resources/images/icons/"+results.results[time].places[where].parties[i].icon;
+
+			img.className='imgClass';
+			img.style.width=this.$.actualdata.style.height;
+			tdimg.appendChild(img);
+			tdimg.style.padding= '0.75em 1em';
+    		tdimg.style.textAlign= 'left';
+			tr.appendChild(tdimg);
+
+			var td2=document.createElement('td');
+			td2.innerHTML=results.results[time].places[where].parties[i].votes;
+			td2.style.padding= '0.75em 1em';
+    		td2.style.textAlign= 'left';
+			tr.appendChild(td2);
+
+			var td3=document.createElement('td');
+			td3.innerHTML=results.results[time].places[where].parties[i].percentage;
+			td3.style.padding= '0.75em 1em';
+    		td3.style.textAlign= 'left';
+			tr.appendChild(td3);
+
+			var td4=document.createElement('td');
+			td4.innerHTML=results.results[time].places[where].parties[i].councillors;
+			td4.style.padding= '0.75em 1em';
+    		td4.style.textAlign= 'left';
+			tr.appendChild(td4);
+			tbody.appendChild(tr)
+			table.appendChild(tbody);
+		}
+		this.shadowRoot.children[1].appendChild(table);
+
+
+		//second option
+		var table=document.createElement('table');
+		table.style.fontSize='15px';
+		table.id='resultsTab_horizontal';
+
+		var thead=document.createElement('thead');
+		var trhead=document.createElement('tr');
+		var th=document.createElement('th');
+		th.style.padding='0em 0em';
+		th.style.textAlign='center';
+		th.innerHTML='CANDIDATURA';
+		trhead.appendChild(th);
+		for(var i=0;i<results.results[time].places[where].parties.length;i++){
+			var th=document.createElement('th');
+			var img=document.createElement('img');
+			img.src="/resources/images/icons/"+results.results[time].places[where].parties[i].icon;
+			img.style.width='30px';
+			th.appendChild(img);
+			th.style.padding='0em 0em';
+			th.style.textAlign='center';
+			trhead.appendChild(th);
+		}
+		thead.appendChild(trhead);
+		table.appendChild(thead);
+
+		var tbody=document.createElement('tbody');
+		var tr=document.createElement('tr');
+
+		var th=document.createElement('th');
+		th.style.padding='0em 0em';
+		th.style.textAlign='center';
+		th.innerHTML='ESCANIOS';
+		tr.appendChild(th);
+		for(var i=0;i<results.results[time].places[where].parties.length;i++){
+			var td=document.createElement('td');
+			td.innerHTML=results.results[time].places[where].parties[i].councillors;
+			td.style.padding='0em 0em';
+			td.style.textAlign='center';
+			tr.appendChild(td);
+		}
+		tbody.appendChild(tr);
+		table.appendChild(tbody);		
+		
+		this.shadowRoot.children[1].appendChild(table);
+
+		//third option
+		var table=document.createElement('table');
+		table.style.fontSize='10px';
+		table.id='resultsTab_pip';
+
+		var thead=document.createElement('thead');
+		var trhead=document.createElement('tr');
+		var th=document.createElement('th');
+		th.style.padding='0em 0em';
+		th.style.textAlign='center';
+		th.innerHTML='CANDIDATURA';
+		trhead.appendChild(th);
+		for(var i=0;i<3;i++){
+			var th=document.createElement('th');
+			var img=document.createElement('img');
+			img.src="/resources/images/icons/"+results.results[time].places[where].parties[i].icon;
+			img.style.width='30px';
+			th.appendChild(img);
+			th.style.padding='0em 0em';
+			th.style.textAlign='center';
+			trhead.appendChild(th);
+		}
+		thead.appendChild(trhead);
+		table.appendChild(thead);
+
+		var tbody=document.createElement('tbody');
+		var tr=document.createElement('tr');
+
+		var th=document.createElement('th');
+		th.style.padding='0em 0em';
+		th.style.textAlign='center';
+		th.innerHTML='ESCANIOS';
+		tr.appendChild(th);
+		for(var i=0;i<3;i++){
+			var td=document.createElement('td');
+			td.innerHTML=results.results[time].places[where].parties[i].councillors;
+			td.style.padding='0em 0em';
+			td.style.textAlign='center';
+			tr.appendChild(td);
+		}
+		tbody.appendChild(tr);
+		table.appendChild(tbody);		
+		
+		this.shadowRoot.children[1].appendChild(table);
+
+
+
+		if(shape===1){
+			this.shadowRoot.children[1].querySelector('#resultsTab').style.display='block';
+			this.shadowRoot.children[1].querySelector('#resultsTab_horizontal').style.display='none';
+			this.shadowRoot.children[1].querySelector('#resultsTab_pip').style.display='none';
+
+		}
+		else if(shape===2){
+			this.shadowRoot.children[1].querySelector('#resultsTab').style.display='none';
+			this.shadowRoot.children[1].querySelector('#resultsTab_horizontal').style.display='block';
+			this.shadowRoot.children[1].querySelector('#resultsTab_pip').style.display='none';
+			
+		}
+		else if(shape===3){
+			this.shadowRoot.children[1].querySelector('#resultsTab').style.display='none';
+			this.shadowRoot.children[1].querySelector('#resultsTab_horizontal').style.display='none';
+			this.shadowRoot.children[1].querySelector('#resultsTab_pip').style.display='block';
+			
+		}
+	}
+
+
+});
+ </script>
+</polymer-element>

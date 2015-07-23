@@ -1,0 +1,393 @@
+
+<polymer-element name="x-control"  extends="component-query">
+
+
+<template>
+
+<style>
+
+
+.a{
+	float: left;
+	z-index:1;
+	background: #535353;
+
+	-webkit-border-radius: 50px;
+
+	border-radius:50px;
+
+	width: 100%;
+	height: 70px;
+
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+
+}
+
+
+.play{
+	z-index:5;
+	display: block;
+	width: 70px;
+	height: 70px;
+	margin-left: 7px;
+	position:relative;
+	background: url(play.png) no-repeat;
+
+	opacity: 1;
+
+
+}
+
+.pause{
+	z-index:5;
+	display: block;
+	width: 70px;
+	height: 70px;
+	margin-left: 7px;
+	position:relative;
+	background: url(pause.png) no-repeat;
+
+	opacity: 1;
+}
+
+.mute{
+	z-index:5;
+	display: block;
+	width: 70px;
+	height: 70px;
+	margin-left: 10px;
+
+	background: url(mute.png) no-repeat;
+
+	opacity: 1;
+}
+
+.sound{
+	z-index:5;
+	display: block;
+	width: 70px;
+	height: 70px;
+	margin-left: 10px;
+
+	background: url(sound.png) no-repeat;
+
+	opacity: 1;
+}
+
+#timeline  {
+
+		appearance:none;
+		-webkit-appearance: none;
+		vertical-align: middle;
+		margin-top:-1px;
+		background:#535353;
+		padding:0px;
+		width:96%;
+		margin-left:2%;
+		margin-right:2%;
+
+
+	}
+#volbar  {
+		appearance:none;
+		-webkit-appearance: none;
+		vertical-align: middle;
+		margin-top:-1px;
+		background:#535353;
+		padding:0px;
+		width:94%;
+		margin-left:4%;
+		margin-right:2%;
+
+	}
+
+.slider:before {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+
+}
+.slider ::-ms-fill-lower {
+    background: #D8D8D8 ;
+    box-shadow: inset 0 0 5px #333;
+    border-radius: 5px;
+}
+.slider ::-ms-track{
+
+		border-radius: 5px;
+		background: #999;
+		box-shadow: inset 0 0 5px #333;
+		color:transparent;
+		height:15px;
+}
+
+
+.slider	::-ms-thumb {
+		appearance: none !important;
+		border-radius: 20px;
+		background-color: #FFF;
+		box-shadow:inset 0 0 10px rgba(000,000,000,0.5);
+		border: 1px solid #999;
+		height: 20px;
+		width: 20px;
+
+	}
+
+.slider ::-moz-range-track {
+
+		border-radius: 5px;
+		box-shadow: inset 0 0 5px #333;
+		background-color: #999;
+		height: 15px;
+
+
+}
+.slider::-moz-range-thumb {
+		-moz-appearance: none;
+		border-radius: 20px;
+		background-color: #FFF;
+		box-shadow:inset 0 0 10px rgba(000,000,000,0.5);
+		border: 1px solid #999;
+		height: 20px;
+		width: 20px;
+	}
+
+
+.slider	::-webkit-slider-runnable-track{
+
+		border-radius: 5px;
+		box-shadow: inset 0 0 5px #333;
+		background-color: #999;
+		height: 15px;
+
+}
+
+.slider	::-webkit-slider-thumb {
+		-webkit-appearance: none !important;
+		border-radius: 20px;
+		background-color: #FFF;
+		box-shadow:inset 0 0 10px rgba(000,000,000,0.5);
+		border: 1px solid #999;
+		height: 20px;
+		width: 20px;
+		margin-top:-2px;
+	}
+
+
+
+
+
+	@media (max-width:349px){
+	    	#box{width:340px;height:70px;}
+	    	#timeline{width:85px;margin-left: 2px;}
+	    	#timeslider{width:50%;}
+	    	#volslider{width:16%;}
+	    	#volbar{width:90%;}
+	    	#sound{margin-left: 5%;}
+	    	#curTime{font-size: 10px;margin-left: -40px;margin-top:0px;font-family: Arial, Helvetica, sans-serif;font-weight: bold;font-style: normal;color: white;}
+	    	#soundbutton{margin-left: '';}
+	}
+	@media (min-width:650px){
+
+			#timeslider{width:56%;}
+			#volslider{width:16%;}
+			#curTime{margin-top:0px;margin-left:0px;}
+
+
+			#box{width:100%;}
+	    	#timeline{width:96%;}
+
+	    	#volbar{width:94%;}
+
+	    	#curTime{font-size: 100%;font-family: Arial, Helvetica, sans-serif;font-weight: bold;font-style: normal;color: white;}
+	    	#soundbutton{margin-left: '';}
+
+	}
+	@media (min-width:400px) and (max-width: 649px){
+
+			#timeslider{width:45%;}
+			#volslider{width:16%;}
+
+			#box{width:100%;}
+			#timeline{width:90%;}
+			#curTime{margin-left:0px ;font-size: 75%;font-family: Arial, Helvetica, sans-serif;font-weight: bold;font-style: normal;color: white;}
+			#volbar{width:90%;}
+
+	}
+	@media (min-width:350px) and (max-width: 399px){
+
+			#timeslider{width:35%;}
+			#volslider{width:16%;}
+
+			#box{width:100%;height:98%}
+			#timeline{width:80%;margin-left:2%;}
+			#curTime{margin-left:-10px ;font-size: 10px;font-family: Arial, Helvetica, sans-serif;font-weight: bold;font-style: normal;color: white;}
+			#volbar{width:90%;}
+
+	}
+
+
+
+
+
+
+</style>
+
+<content></content>
+
+<div horizontal layout  id="box" class="a">
+
+<div><a  id="playbutton" on-click="{{playStatus}}"/></a></div>
+<div class="slider" id="timeslider" ><input id="timeline" type="range" min="0" max="200" value="5" step="1" on-change={{timeslider}}/></input></div>
+
+<div style="width:10%;margin-top:0px;font-family: Arial, Helvetica, sans-serif;font-weight: bold;font-style: normal;color: white;" id="curTime" title="Current time">00:00:00</div>
+
+<div id="sound"><a id="soundbutton"  on-click={{Mute}}/></a></div>
+
+<div   class="slider" id="volslider"><input id="volbar" type="range" min="0" max="10" value="5" step="1"  on-change={{volslider}}/></input></div>
+
+
+
+</div>
+
+
+
+
+</template>
+
+ <script>
+ Polymer('x-control',{
+	id:'',
+	l:'',
+
+	ready: function(l) {
+
+		this.$.box.className="a";
+		this.$.box.children[0].children[0].className="pause";
+	    this.$.box.children[3].children[0].className="sound";
+	//	this.id=this.children[0];
+		var scope=this;
+		this.parentElement.children[0].attributes[1]=this.start_time;
+		document.addEventListener('length', function(e) {
+
+			scope.l=e.detail;
+
+			document.addEventListener('time', function(e) {
+
+				scope.$.timeline.value=(e.detail.time*scope.$.timeline.max)/scope.l;
+
+				if(e.detail.time==scope.l)scope.$.playbutton.className='play';
+
+				var sec_num = parseInt(e.detail.time, 10);
+	    		var hours   = Math.floor(sec_num / 3600);
+	    		var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+	    		var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+	    		if (hours   < 10) {hours   = "0"+hours;}
+	    		if (minutes < 10) {minutes = "0"+minutes;}
+	    		if (seconds < 10) {seconds = "0"+seconds;}
+	    		var time    = hours+':'+minutes+':'+seconds;
+
+				scope.$.curTime.textContent = time;
+
+
+			});
+		});
+    },
+
+	timeslider:function(){
+
+		   var value=this.$.timeline.value;
+		   var m=this.$.timeline.max;
+		   this.fire('timeChange',{'value':value,'maxtime':m});
+	},
+	playStatus:function(){
+			console.log("PLAY STATUSSSS");
+			this.fire('PlayPause');
+			var pStatus='';
+			if (this.$.playbutton.className=='play' ){
+				this.$.playbutton.className='pause';
+				pStatus = 'pause';
+			}
+			else{
+				this.$.playbutton.className='play';
+				pStatus = 'play';
+			}
+			var sharedContext = JSON.parse(this.getAttribute('sharedcontexts'));
+			sharedContexts = sharedContext.filter(function(el,i){ if (el.name == 'play') return true;else return false;});
+			sharedContexts = sharedContexts.map (function(el,i){
+				 el.value = pStatus;
+				return el;
+			})
+			//sharedContext.value = pStatus;
+			document.querySelector('ms-app').shadowRoot.querySelector('ms-appContext').fire('componet-var-update',sharedContexts);
+
+	},
+	volslider:function(){
+	   var value=this.$.volbar.value;
+	   var m=this.$.volbar.max;
+	   this.fire('volChange',{'value':value,'maxvol':m});
+	   	var value=this.$.volbar.value;
+	   	var m=this.$.volbar.max;
+	   	this.fire('volChange',{'value':value,'maxvol':m});
+		if(this.$.volbar.value=='0' && this.$.soundbutton.className=='sound' )
+		{
+			this.$.soundbutton.className='mute';
+			this.fire('Mute');
+		}
+		else if(this.$.volbar.value!='0' && this.$.soundbutton.className=='mute')
+		{
+			this.$.soundbutton.className='sound';
+			this.fire('Mute');
+		}
+		console.log("changing vol");
+		var sharedContext = JSON.parse(this.getAttribute('sharedcontexts'));
+		sharedContext = sharedContext.filter(function(el,i){ if (el.name == 'volume') return true;else return false;})[0];
+		sharedContext.value = value/m;
+		console.log(m);
+		document.querySelector('ms-app').shadowRoot.querySelector('ms-appContext').fire('componet-var-update',sharedContext);
+
+	},
+
+	PlayPause: function(e) {
+	  	this.fire('PlayPause');
+
+	  	if (this.$.playbutton.className=='play' ){
+	    	this.$.playbutton.className='pause';
+	  	}
+	  	else{
+	    	this.$.playbutton.className='play';
+	  	}
+	},
+	attributeChanged: function(attr, oldVal, curVal) {
+			console.log(curVal);
+	},
+
+
+	Mute:function(id){
+		var mute = false;
+		if (this.$.soundbutton.className=='sound' && this.$.volbar.value!='0'){
+		    this.fire('Mute');
+		    this.$.soundbutton.className='mute';
+		    this.$.volbar.value='0';
+				vol = true;
+		}
+		else if( this.$.soundbutton.className=='mute' && this.$.volbar.value!='0') {
+		    this.fire('Mute');
+			this.$.soundbutton.className='sound';
+			vol = false;
+
+		}
+		var sharedContext = JSON.parse(this.getAttribute('sharedcontexts'));
+		sharedContext = sharedContext.filter(function(el,i){ if (el.name == 'muted') return true;else return false;})[0];
+		sharedContext.value = vol;
+		document.querySelector('ms-app').shadowRoot.querySelector('ms-appContext').fire('componet-var-update',sharedContext);
+	}
+
+});
+ </script>
+</polymer-element>

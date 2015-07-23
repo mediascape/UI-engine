@@ -1,0 +1,253 @@
+
+<polymer-element name="component-query">
+  <!--<script src="MutationObserver.js"></script>-->
+
+  <script>
+    Polymer('component-query', {
+      elem:null,
+      observer: null,
+      done:false,
+      mediaList:[],
+      created:function(){
+        console.log('component-query created');
+        var self = this;
+
+        var toObserve = this.impl ? this.impl :this;
+        console.log(this);
+
+
+
+
+      },
+      ready: function() {
+        console.log("QUERY");
+        //console.log(this);
+
+      },
+      domReady:function(){
+        console.log("DOM READY");
+        var self = this;
+         this.done = true;
+
+        /* content query rules from components style */
+
+
+      },
+      detached:function (){
+        console.log("DETATCHED");
+      },
+      attached:function (){
+        console.log("atTATCHED");
+      },
+      doneChanged:function (){
+      //  console.log()
+        var self = this;
+        var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+         this.observer = new MutationObserver(function(mutations) {
+
+          mutations.forEach(function(mutation) {
+
+            if (mutation.attributeName === 'style'){
+
+              this.updateNodes();
+
+            }
+          },self);
+        });
+
+        this.observer.observe(this, {
+          attributes: true,
+          attributeFilter: ["style", "dir"],
+          childList: true
+        });
+
+        var cssRules='';
+        if (this.shadowRoot.styleSheets)
+            cssRules=this.shadowRoot.styleSheets.item(0).cssRules;
+        else {
+            /**
+             * Find stylesheet relation width component
+             *
+             */
+             var localName= this.localName;
+             var appStyles = document.styleSheets;
+             var ownStyleSheet=null;
+             console.log(appStyles);
+             for (var x in appStyles){
+                 if (appStyles[x].ownerNode)
+                  if (appStyles[x].ownerNode.textContent.indexOf(localName)>-1)
+                    ownStyleSheet=appStyles[x];
+             }
+             /**
+              * Find which of them have media condition
+              *
+              */
+
+            cssRules=ownStyleSheet.cssRules;
+        }
+        this.mediaList=[];
+
+        for (var x in cssRules){
+
+            if (cssRules[x].cssText)
+              if (cssRules[x].cssText.indexOf('@media')>-1){
+              this.mediaList.push(cssRules[x]);
+            }
+        }
+        console.log(this.mediaList);
+      },
+      // Whenever component style is changed update to correspondos @media
+      updateNodes:function (){
+
+        var mediaRule = this.mediaList.filter(function(el,i){
+
+
+        var ua = navigator.userAgent.toLowerCase();
+        var check = function(r) {
+          return r.test(ua);
+        };
+        var isIE =check(/rv:11.0/);
+        if(isIE){
+          var aux = el.media.item(0).split('all and ')[1];
+
+        }
+        else{
+          var aux =el.media.item(0);
+        }
+
+  		  var and=aux.split('and');
+  		  if(and.length===2){
+    			var a=and[0];
+    			var b=and[1];
+    			var ok_a=false;
+    			var ok_b=false;
+
+    			var width = parseInt(a.split('max-width:')[1]);
+    			  if(isNaN(width)===false)
+    			  {
+
+      		    if (parseInt(this.style.width)<=width)
+      				{
+      					ok_a=true;
+      				}
+      			  else {
+      					ok_a=false;
+      				}
+    			  }
+    			  else{
+    				var width = parseInt(a.split('min-width:')[1]);
+    				if(isNaN(width)===false){
+
+    			    if (parseInt(this.style.width)>=width)
+    					{
+    						ok_a=true;
+    					}
+    				  	else
+    					{
+    						ok_a=false;
+    					}
+    				}
+    			}
+    			var width = parseInt(b.split('max-width:')[1]);
+    			  if(isNaN(width)===false)
+    			  {
+
+      		    if (parseInt(this.style.width)<=width)
+      				{
+      					ok_b=true;
+      				}
+      			  	else {
+      					ok_b=false;
+      				}
+    			  }
+    			  else{
+      				var width = parseInt(b.split('min-width:')[1]);
+      				if(isNaN(width)===false){
+
+      			   if (parseInt(this.style.width)>=width)
+      					{
+      						ok_b=true;
+      					}
+      				  	else
+      					{
+      						ok_b=false;
+      					}
+    				}
+  			  }
+
+  			  if(ok_a===true && ok_b===true)return true;
+  			  else return false;
+
+
+		}
+
+		else{
+
+
+		  var width = parseInt(aux.split('max-width:')[1]);
+		  if(isNaN(width)===false)
+		  {
+
+      	if (parseInt(this.style.width)<=width)
+  			{
+  				return true;
+  			}
+      	else {
+				  return false;
+			  }
+		  }
+		  else{
+			var width = parseInt(aux.split('min-width:')[1]);
+			if(isNaN(width)===false){
+
+	      if (parseInt(this.style.width)>=width)
+				{
+					return true;
+				}
+		    else
+				{
+					return false;
+				}
+			}
+	  }
+		}
+
+        },this);
+      
+        var obj=[];
+        for(var l=0;l<mediaRule.length;l++){
+          for (var m = 0 ; m < mediaRule[l].cssRules.length; m++){
+
+
+
+              obj[mediaRule[l].cssRules[m].selectorText] = mediaRule[l].cssRules[m].cssText.split('{')[1].split('}')[0];
+
+              var style = mediaRule[l].cssRules[m].style;
+
+              var elem=[];
+              elem =   this.shadowRoot.querySelectorAll(''+mediaRule[l].cssRules[m].selectorText);
+
+              if(elem.length!=0){
+
+                for (var i=0;i<style.length;i++){
+                    if (!isNaN(i)){
+
+                      for(var k=0;k<elem.length;k++){
+                        elem[k].style[style[i]] = style[style[i]];
+                        //  this.style[style[i]] = style[style[i]];
+
+                      }
+                    }
+                }
+
+
+                this.shadowRoot.querySelector(''+mediaRule[l].cssRules[m].selectorText).style=mediaRule[l].cssRules[m].cssText.split('{')[1].split('}')[0];
+
+              }
+          }
+        }
+        //console.log(obj);
+      }
+    });
+  </script>
+</polymer-element>

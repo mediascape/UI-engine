@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+ <head>
+
+    <script src="components/platform/platform.js"></script>
+  <link rel="import" href="components/polymer/polymer.html">
+  <link rel="import" href="video-audio.html">
+  <link rel="import" href="media_controller.html">
+  <link rel="import" href="media-query.html">
+
+ </head>
+ <body unresolved>
+<x-control>
+<x-media id="video" start_time="0" start_volume=0.5 file="http://192.168.10.4/konponenteak/audio-video/trailer.webm" subtitles="subtitles.vtt"></x-media>
+</x-control>
+ </body>
+</html>

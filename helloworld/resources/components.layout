@@ -1,0 +1,68 @@
+
+#video1{
+  needs:none;
+  order:1;
+  rwidth:780px;
+  propx:16;
+  propy:9;
+  required:true;
+  duplicable:false;
+  bestfit:biggestScreenSize;
+  movable:false;
+}
+#video2{
+  needs:none;
+  order:4;
+  rwidth:390px;
+  propx:16;
+  propy:9;
+  required:false;
+  duplicable:false;
+  bestfit:biggestScreenSize;
+  movable:true;
+}
+#video3{
+  needs:none;
+  order:4;
+  rwidth:390px;
+  propx:16;
+  propy:9;
+  required:false;
+  duplicable:false;
+  bestfit:biggestScreenSize;
+  movable:true;
+}
+#google-map{
+  needs:none;
+  order:2;
+  rwidth:560px;
+  propx:560;
+  propy:298;
+  required:true;
+  duplicable:true;
+  bestfit:touchable;
+  movable:true;
+}
+#control{
+  needs:none;
+  order:5;
+  rwidth:560px;
+  propx:560;
+  propy:250;
+  required:true;
+  duplicable:true;
+  bestfit:touchable;
+  movable:false;
+}
+#train_metadata{
+  needs:none;
+  order:3;
+  rwidth:560px;
+  propx:560;
+  propy:150;
+  required:false;
+  duplicable:false;
+  bestfit:biggestScreenSize;
+  movable:true;
+
+}

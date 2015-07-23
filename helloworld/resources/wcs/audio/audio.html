@@ -1,0 +1,108 @@
+
+
+<!--<link rel="import" href="component-query.html">-->
+<polymer-element name="x-audio" extends="component-query" attributes="id start_time currTime start_volume file subtitles" >
+
+<template>
+<style>
+	@media (max-width:350px){
+	    	#player{width:170px;margin-left: 80px;}
+
+
+	}
+	@media (min-width:351px){
+	    	#player{width:60%; margin-left: 20%; margin-right:20%;}
+
+	}
+
+</style>
+
+ <div id="audio_img"></div>
+<div  id="container"></div>
+
+</template>
+
+ <script>
+ Polymer('x-audio',{
+
+
+
+
+    ready: function() {
+
+
+		  	var image=document.createElement('img');
+		   	image.src="../webcomponents/appComponents/audio/audio.png";
+
+		   	image.id="player";
+		   	this.$.audio_img.appendChild(image);
+		   	var audio=document.createElement('audio');
+
+		   	audio.src=this.file;
+		   	audio.preload="auto";
+		   	this.$.container.appendChild(audio);
+		   	audio.play();
+	 	   	audio.pause();
+		   	function canPlay(e) {
+		  	 	audio.volume=this.start_volume;
+	    	   	audio.play();
+		   	 	audio.currentTime = this.start_time;
+		   	 	var a_length=audio.duration;
+		   		this.fire('length',a_length);
+	 			document.getElementById("audio").removeEventListener("canplay",canPlay,false);
+		   	}
+	   		document.getElementById("audio").addEventListener("canplay",canPlay,false);
+
+
+	   		var scope=this;
+
+		    document.addEventListener('PlayPause', function(e) {
+	    		if (audio.paused)
+		   	  		audio.play();
+				else
+		   	  		audio.pause();
+	     	});
+
+		    document.addEventListener('Mute', function(e) {
+	    		if(audio.muted){audio.muted=false;}
+				else{audio.muted=true;}
+	     	});
+
+		   	document.querySelector('x-audio').addEventListener('timeupdate', function(e) {
+				var time=audio.currentTime;
+				scope.fire('time',{'time':time});
+			});
+
+		   	document.addEventListener('timeChange', function(e) {
+
+				audio.currentTime=(e.detail.value*audio.duration)/e.detail.maxtime;
+		    });
+
+		    document.addEventListener('volChange', function(e) {
+			 	audio.volume=e.detail.value/e.detail.maxvol;
+		    });
+
+			this.currTimeChanged(this.getAttribute('currTime'));
+
+
+    },
+    attributeChanged: function(attr, oldVal, curVal) {
+        if (attr === 'currTime') {
+          this.currTimeChanged(curVal);
+        }
+    },
+
+    currTimeChanged: function(currTime) {
+    	if (this.currTime > 0) {
+      		this.parentElement.children[0].impl.setAttribute('currTime', this.currTime);
+	  		this.$.container.children[0].impl.currentTime=this.currTime;
+    	}
+  	}
+
+
+
+
+
+});
+ </script>
+</polymer-element>

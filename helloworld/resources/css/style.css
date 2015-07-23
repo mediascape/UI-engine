@@ -1,0 +1,137 @@
+.button {
+
+            background-color: Transparent;
+            background-repeat:no-repeat;
+            border: none;
+            cursor:pointer;
+            overflow: hidden;
+            position:absolute;
+            top:10px;
+            left:10px;
+            z-index:999;
+
+        }
+
+
+@keyframes shrink{
+      from {
+  
+   left:100px;
+ }
+ to {
+
+   left:0px;
+    }
+
+}
+
+@keyframes grow{
+ from {
+       left:0px;
+ }
+ to {
+  
+   left:20px;
+    }
+}
+
+@keyframes menuDown{
+ from {
+       height:0%;
+ }
+ to {
+  
+   height:40%;
+    }
+}
+@keyframes menuUp{
+ from {
+       height:40%;
+ }
+ to {
+  
+    height:0%;
+    }
+}
+  @keyframes bounce {
+          from {
+            transform: rotate(0deg);
+            width:50%;
+          }
+
+          to {
+            transform: rotate(360deg);
+            width:50%;
+          }
+        }
+        @keyframes opa {
+          from {
+
+            opacity: 1;
+          }
+
+          to {
+
+            opacity: 0;
+          }
+        }
+
+@keyframes UpOut{
+ from {
+       top:0%;
+ }
+ to {
+      top:-100%;
+    }
+}
+
+@keyframes UpIn{
+ from {
+      top:100%;
+ }
+ to {
+      top:0%;
+      
+    }
+}
+
+@keyframes DownIn{
+ from {
+       top:-100%;
+       
+ }
+ to {
+  
+    top:0%;
+
+    }
+}
+@keyframes DownOut{
+ from {
+       top:0%;
+ }
+ to {
+  
+    top:100%;
+    }
+}
+
+@keyframes spinnerToFullscreen{
+ from {
+       transform:scale(0.5);
+ }
+ to {
+  
+    transform:scale(1);
+    }
+}
+
+@keyframes fullscreenToSpinner{
+ from {
+       transform:scale(1);
+ }
+ to {
+  
+    transform:scale(0.7);
+    }
+}

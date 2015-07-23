@@ -1,0 +1,369 @@
+<link rel="import" href="../polymer/paper-slider/paper-slider.html">
+<link href='http://fonts.googleapis.com/css?family=Luckiest+Guy' rel='stylesheet' type='text/css'>
+<polymer-element name="mediascape-timeline" extends="component-query" attributes="icon">
+<template>
+  <style>
+  :host {
+    display: block;
+    background-color: white;
+  }
+  body{
+    background-color: white;
+  }
+  #container{
+    background-color:white;
+    height:100%;
+    margin-top:0px;
+  }
+  @media (max-width:340px){
+
+    #buttons{
+      margin-left:25%;
+      margin-top:5%;
+    }
+    #slider {
+      width:85%;
+      margin-left:10%;
+      margin-top:0%;
+    }
+    #rewind{
+      width:40px;
+      height:40px;
+    }
+    #play{
+      width:40px;
+      height:40px;
+    }
+    #foward{
+      width:40px;
+      height:40px;
+    }
+    #time{
+      display: block;
+      margin-top:0px;
+    }
+
+  }
+  @media (min-width:341px) and (max-width: 364px){
+
+    #buttons{
+      margin-left:25%;
+      margin-top:10%;
+    }
+    #slider {
+      width:85%;
+      margin-left:10%;
+    }
+    #time {
+      color:#3f51b5;
+      text-align:center;
+      width:100%;
+      font-family: 'Luckiest Guy', cursive;
+      margin-top:0%;
+    }
+    #rewind{
+      width:90px;
+      height:90px;
+    }
+    #play{
+      width:90px;
+      height:90px;
+    }
+    #foward{
+      width:90px;
+      height:90px;
+    }
+
+  }
+  @media (min-width:365px) and (max-width: 634px){
+
+    #container{
+      vertical-align: middle;
+      border:1px solid black;
+
+    }
+    #buttons{
+      padding-top:5%;
+      margin-left:25%;
+      margin-top:0%;
+    }
+    #slider {
+      width:85%;
+      margin-left:10%;
+      margin-top:3%;
+    }
+    #time {
+      color:#3f51b5;
+      text-align:center;
+      width:100%;
+      font-family: 'Luckiest Guy', cursive;
+      margin-top:2%;
+      display:block;
+    }
+    #rewind{
+      width:90px;
+      height:90px;
+    }
+    #play{
+      width:90px;
+      height:90px;
+    }
+    #foward{
+      width:90px;
+      height:90px;
+    }
+
+
+  }
+  @media (min-width:635px) and (max-width: 650px){
+
+    #buttons{
+      margin-left:25%;
+      margin-top:10%;
+    }
+    #slider {
+      width:85%;
+      margin-left:10%;
+    }
+    #time {
+      color:#3f51b5;
+      text-align:center;
+      width:100%;
+    }
+
+
+  }
+  @media (min-width:651px) and (max-width: 749px){
+
+  #buttons{
+    margin-left:50%;
+    margin-top:40%;
+
+  }
+  #slider {
+    width:85%;
+    margin-top:20%;
+    margin-left:10%;
+  }
+  #time {
+    color:#3f51b5;
+    text-align:center;
+    width:100%;
+  }
+  }
+  @media (min-width:1000px) and (min-aspect-ratio:9/1){
+  #container{
+    height:100%;
+    margin-top:0%;
+    vertical-align: middle;
+  }
+  #buttons{
+    margin-left:38%;
+    margin-top:0%;
+    width:60%;
+    padding-top:0px;
+  }
+  #slider {
+    width:85%;
+    margin-top:0%;
+    margin-left:10%;
+  }
+  #time {
+    color:#3f51b5;
+    text-align:center;
+    font-size:125%;
+    margin-top:-4%;
+  }
+  #rewind{
+    width:100px;
+    height:100px;
+  }
+  #play{
+    width:100px;
+    height:100px;
+  }
+  #foward{
+    width:100px;
+    height:100px;
+  }
+  }
+  @media (min-width:1000px) and (min-aspect-ratio:13/9){
+  #container{
+    height:100%;
+    margin-top:0%;
+    vertical-align: middle;
+  }
+  #buttons{
+    margin-left:35%;
+    margin-top:30%;
+
+  }
+  #slider {
+    width:85%;
+    margin-top:5%;
+    margin-left:10%;
+  }
+  #time {
+    color:#3f51b5;
+    text-align:center;
+    width:100%;
+    margin-top:5%;
+    font-size:125%;
+    display:block;
+  }
+  #rewind{
+    width:140px;
+    height:140px;
+  }
+  #play{
+    width:140px;
+    height:140px;
+  }
+  #foward{
+    width:140px;
+    height:140px;
+  }
+  }
+
+
+
+  </style>
+  <div id="container">
+    <!--<img src="resource/images/pause.svg" />-->
+  <div id="buttons">
+    <img id="rewind" src="/resources/images/rewind.svg" on-tap="{{rewind}}" />
+    <img id="play" src="/resources/images/play.svg" on-tap="{{play}}"/>
+    <img id="foward" src="/resources/images/foward.svg" on-tap="{{foward}}"/>
+  </div>
+    <paper-slider id="slider" markers={{markers}} snaps value="0" role="slider" tabindex="0" aria-valuemin="0" max="1561"  aria-valuenow="0"></paper-slider>
+    <div id="time">
+
+    </div>
+    </div>
+
+
+</template>
+
+
+
+
+
+<script>
+
+
+Polymer('mediascape-timeline', {
+  p:null,
+  eta:null,
+  markers:null,
+  created: function() {
+    console.log('Timeline for live event, simulation');
+
+  },
+
+  ready: function() {
+    document.addEventListener ('adaptationToolkit-ready',function(e){
+      console.log(mediascape.Communication.getAgents());
+    });
+    document.addEventListener ('motion-ready',this.smReady.bind(this));
+    var _this = this;
+    this.$.slider.addEventListener('change',function(e){
+      _this.sm.mapp.motions.shared.update(e.detail.timesliderValue,1,0);
+    });
+    this.addEventListener('component-query',function(e){
+      _this.markers=[{value:120,description:"PNV-talks"},{value:540,description:'Bildu sync'},{value:800,description:"test"}];
+    });
+
+  },
+  smReady:function(){
+    this.sm = mediascape.Communication.sharedmotion();
+    if (!mediascape.Communication.getUrlVar('group'))  this.sm.mapp.motions.shared.update(0);
+   if (this.sm.mapp.motions.shared.vel == 0) {
+
+      this.$.play.setAttribute('src','/resources/images/play.svg');
+    } else {
+
+      this.$.play.setAttribute('src','/resources/images/pause.svg');
+    }
+    var _this = this;
+    var handler = function (e) {
+      _this.$.slider.setAttribute('value',Math.round(e.pos));
+      _this.$.time.innerHTML = _this.prettyPrint(83869 +e.pos);
+    };
+    this.sm.mapp.motions.shared.on("timeupdate", handler);
+  },
+  play:function (e){
+    console.log(this.$.play.src);
+     if (this.$.play.src.indexOf("play.svg")>-1){
+            this.$.play.src="/resources/images/pause.svg";
+            this.sm.mapp.motions.shared.update(null,1,0);
+          }
+     else  {
+       this.$.play.src="/resources/images/play.svg";
+       this.sm.mapp.motions.shared.update(null,0,0);
+     }
+  },
+  foward:function (e){
+            var time = this.sm.mapp.motions.shared.query();
+            time = this.findNextMarkerTime (time);
+            this.sm.mapp.motions.shared.update(time,1,0);
+
+  },
+  rewind:function (e){
+
+            var time = this.sm.mapp.motions.shared.query();
+            time = this.findPreviousMarkerTime (time);
+            this.sm.mapp.motions.shared.update(time,1,0);
+  },
+
+  beginning:function(e){
+    //e.stopPropagation();
+    this.sm.mapp.motions.shared.update(0);
+    this.$.toggle.setAttribute('src','../resources/wcs/mediascape-trainController/pause-icon.png');
+  },
+  findNextMarkerTime:function(time){
+
+      var mSorted = this.markers.sort(function(a,b){
+            if (a.value>b.value) return 1;
+            else return -1;
+      });
+      var m1 = mSorted.sort(function(m1,m2){
+          if (m1.value<time.pos) return 1;
+          else return -1;
+      });
+      return m1[0].value;
+
+  },
+  findPreviousMarkerTime:function(time){
+
+      var mSorted = this.markers.sort(function(a,b){
+          if (a.value<b.value) return 1;
+          else return -1;
+        });
+        var m1 = mSorted.filter(function(m1){
+          if (m1.value+10<time.pos) return true;
+          else return false;
+        });
+      return m1[0].value;
+  },
+  prettyPrint:function(val){
+    // Convert time in seconds to X days, hours, minutes, seconds
+    var days = Math.floor(val / (60 * 60 * 24));
+    var hours = Math.floor((val - days * (60 * 60 * 24)) / (60 * 60));
+    var mins = Math.floor((val - days * (60 * 60 * 24) - hours * (60 * 60)) / (60));
+    var secs = Math.floor((val - days * (60 * 60 * 24) - hours * (60 * 60)) - mins * 60);
+    var s = "";
+    if (days > 1) s = days + " days ";
+    else if (days > 0) s = days + " day ";
+    if (hours > 1) s += hours + " : ";
+    else if (hours > 0) s += hours + " : ";
+    if (mins > 1) s += mins + " : ";
+    else if (mins > 0) s += mins + " : ";
+    if (secs > 9) s += secs + "  ";
+    else s += "0"+secs ;
+    return s;
+  }
+
+
+});
+  </script>
+ </polymer-element>

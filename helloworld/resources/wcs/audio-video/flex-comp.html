@@ -1,0 +1,40 @@
+<polymer-element name="flex-comp" attributes="element">
+	<template>
+
+	</template>
+
+
+ 	<script>
+	
+ 	Polymer('flex-comp',{
+		target:'',
+		observer:'',
+	   ready:function(){
+		this.target = document.querySelector("#"+this.element);
+ 
+		this.observer = new MutationObserver(function(mutations) {
+		     console.log(mutations); 
+		 
+		});
+		var config = { attributes: true, childList: true, characterData: true };
+		this.observer.observe( this.target,config);
+		
+	   }
+	  
+	});
+ 	</script>
+
+</polymer-element>
+
+
+
+
+
+
+<!--var t=document.querySelector(this.element);
+		t.style.display='block';
+		var wi=this.w/t.clientWidth;
+		var he=this.h/t.clientHeight;
+		t.style.width=parseInt(this.w)+"px";
+		t.style.height=parseInt(this.h)+"px";
+		t.style.webkitTransform='scale('+wi+','+he+')';-->

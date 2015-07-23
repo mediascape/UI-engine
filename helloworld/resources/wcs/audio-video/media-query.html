@@ -1,0 +1,41 @@
+
+<polymer-element name="media-query" attributes="query queryMatches">
+  <template>
+    <style>
+      :host {
+        display: none;
+      }
+    </style>
+  </template>
+  <script>
+    Polymer('media-query', {
+
+      queryMatches: false,
+      query: '',
+      ready: function() {
+        this._mqHandler = this.queryHandler.bind(this);
+        this._mq = null;
+      },
+      queryChanged: function() {
+        if (this._mq) {
+          this._mq.removeListener(this._mqHandler);
+        }
+        var query = this.query;
+       	for(j=0;j<query.length;j++)
+	{
+        	this._mq = window.matchMedia(query[j]);
+		this._mq.addListener(this._mqHandler);
+        	this.queryHandler(this._mq);
+	}
+	console.log("changed");
+
+      },
+
+      queryHandler: function(mq) {
+        this.queryMatches = mq.matches;
+	      console.log("querying");
+        this.asyncFire('core-media-change', mq);
+      }
+    });
+  </script>
+</polymer-element>

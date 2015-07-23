@@ -1,0 +1,179 @@
+
+
+
+<polymer-element name="x-media" extends="component-query" attributes="id start_time currTime start_volume file subtitles" >
+
+<template>
+<style>
+	@media (max-width:350px){
+	    	#player2{width:170px;margin-left: 80px;}
+	    	#player1{width:345px;}
+
+	}
+	@media (min-width:351px){
+	    	#player2{width:60%; margin-left: 20%; margin-right:20%;}
+	    	#player1{width:100%;height:100%;}
+
+	}
+
+</style>
+
+ <div id="audio_img"></div>
+<div  id="container"></div>
+
+</template>
+
+ <script>
+ Polymer('x-media',{
+
+
+
+    l:'',
+    ready: function() {
+
+        if(this.id=="video1"){
+		   	var video=document.createElement('video');
+		   	video.id="player1";
+		   	video.src=this.file;
+		  	video.preload="auto";
+		   	video.innerHTML='<track src="'+this.subtitles+'" kind="subtitles" srclang="en" label="English" default></track>';
+		   	this.$.container.appendChild(video);
+		   	video.play();
+	 	   	video.pause();
+
+				var  scope=this;
+		   	function canPlayV(e) {
+				this.start_volume = this.start_volume | 0;
+				console.log(this.start_volume);
+		  	 	video.volume=this.start_volume ;
+				
+	    	   		video.play();
+				this.start_time = this.start_time | 0;
+		   	 	video.currentTime = this.start_time;
+				console.log(this.start_time);
+		   	 	var v_length=video.duration;
+				console.log(this.fire);
+		   		scope.fire('length',v_length);
+	 				scope.shadowRoot.querySelector("video").removeEventListener("canplay",canPlayV,false);
+		   	}
+	   	   	scope.shadowRoot.querySelector("video").addEventListener("canplay",canPlayV,false);
+
+
+    	    document.addEventListener('PlayPause', function(e) {
+	    		if (video.paused){
+		   	  		video.play();
+			  		scope.fire('clear');
+				}
+				else{
+		   	  		video.pause();
+			  		var curr=video.currentTime;
+			  		scope.fire('show',{'curr':curr});
+				}
+	    	});
+
+    	   this.shadowRoot.querySelector("video").addEventListener('Mute', function(e) {
+		       	if(video.muted){video.muted=false;}
+				else{video.muted=true;}
+	    	});
+		    document.querySelector('x-media').addEventListener('timeupdate', function(e) {
+				var time=video.currentTime;
+				var vol=video.volume;
+				scope.fire('time',{'time':time,'vol':vol});
+			});
+	   	    document.addEventListener('takeTime',function(e){
+				var curr=video.currentTime;
+			    scope.fire('giveTime',{'curr':curr});
+		    });
+		    document.addEventListener('checkPause', function(e){
+				if(video.paused)
+			 	{
+  					scope.fire('show',{'curr':video.currentTime});
+				}
+		    });
+		    document.addEventListener('timeChange', function(e) {
+				video.currentTime=(e.detail.value*video.duration)/e.detail.maxtime;
+				scope.fire('show',{'curr':video.currentTime});
+			});
+
+		    document.addEventListener('volChange', function(e) {
+		   		video.volume=e.detail.value/e.detail.maxvol;
+		    });
+
+        }
+		else if(this.id=="audio"){
+
+		  	var image=document.createElement('img');
+		   	image.src="audio.png";
+
+		   	image.id="player2";
+		   	this.$.audio_img.appendChild(image);
+		   	var audio=document.createElement('audio');
+
+		   	audio.src=this.file;
+		   	audio.preload="auto";
+		   	this.$.container.appendChild(audio);
+		   	audio.play();
+	 	   	audio.pause();
+		   	function canPlay(e) {
+		  	 	audio.volume=this.start_volume;
+	    	   	audio.play();
+		   	 	audio.currentTime = this.start_time;
+		   	 	var a_length=audio.duration;
+		   		this.fire('length',a_length);
+	 			document.getElementById("audio").removeEventListener("canplay",canPlay,false);
+		   	}
+	   		document.getElementById("audio").addEventListener("canplay",canPlay,false);
+
+
+	   		var scope=this;
+
+		    document.addEventListener('PlayPause', function(e) {
+	    		if (audio.paused)
+		   	  		audio.play();
+				else
+		   	  		audio.pause();
+	     	});
+
+		    document.addEventListener('Mute', function(e) {
+	    		if(audio.muted){audio.muted=false;}
+				else{audio.muted=true;}
+	     	});
+
+		   	document.querySelector('x-media').addEventListener('timeupdate', function(e) {
+				var time=audio.currentTime;
+				scope.fire('time',{'time':time});
+			});
+
+		   	document.addEventListener('timeChange', function(e) {
+
+				audio.currentTime=(e.detail.value*audio.duration)/e.detail.maxtime;
+		    });
+
+		    document.addEventListener('volChange', function(e) {
+			 	audio.volume=e.detail.value/e.detail.maxvol;
+		    });
+		}
+		this.currTimeChanged(this.getAttribute('currTime'));
+
+
+    },
+    attributeChanged: function(attr, oldVal, curVal) {
+        if (attr === 'currTime') {
+          this.currTimeChanged(curVal);
+        }
+    },
+
+    currTimeChanged: function(currTime) {
+    	if (this.currTime > 0) {
+      		this.parentElement.children[0].impl.setAttribute('currTime', this.currTime);
+	  		this.$.container.children[0].impl.currentTime=this.currTime;
+    	}
+  	}
+
+
+
+
+
+});
+ </script>
+</polymer-element>

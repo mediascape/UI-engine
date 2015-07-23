@@ -1,0 +1,57 @@
+
+<polymer-element name="mediascape-normap" extends="component-query" attributes="icon">
+<template>
+<link rel="stylesheet" href="map/js/leaflet/leaflet.css" />
+  <style>
+    :host {
+      display: block;
+    }
+    @media (max-width:350px){
+          #map{width:100%;height:100%;}
+
+
+    }
+    @media (min-width:351px){
+          #map{width:100%;height:100%;}
+          body{width:100%;height:100%;}
+          html{width:100%;height:100%;}
+    }
+
+  </style>
+  <div id="map"></div>
+</template>
+
+<script src="map/js/stations.js"></script>
+<script src="map/js/holmenkollbanen_geoJSON.js"></script>
+<script src="map/js/train_gps_timeseries.js"></script>
+<script src="map/js/holmenkollbanen_offline.js"></script>
+<script>
+
+
+Polymer('mediascape-normap', {
+  policy:null,
+  created: function() {
+      console.log('HolmenkollbanenMap component loaded')
+  },
+
+  ready: function() {
+
+    document.addEventListener ('motion-ready',this.smReady.bind(this));
+    this.policy = function (msv) {
+      return (msv.vel > 1) ? 50 : 500;
+    };
+
+    },
+    smReady:function(){
+      this.sm = mediascape.Communication.sharedmotion();
+
+      this.map = makeHolmenkollbanenMap(dataset,
+        this.sm.mapp.msvs.shared,{
+          policy: this.policy
+        },this.$.map);
+      
+    }
+
+  });
+  </script>
+ </polymer-element>

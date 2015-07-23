@@ -1,0 +1,351 @@
+<link rel="import" href="../polymer/paper-slider/paper-slider.html">
+<polymer-element name="mediascape-timeline" extends="component-query" attributes="icon">
+<template>
+  <style>
+  :host {
+    display: block;
+  }/*
+  @media (max-width:340px){
+
+     #infographics {
+      background-color:white;
+      font-family: sans-serif;
+      font-size:0.5em;
+      background-color:white;
+      opacity:0.6;
+      color:black;
+      height:100%;
+      width:100%;
+      position:relative;
+    }
+    #control{
+      height:100%;
+
+     }
+   #toggle{
+      font-family: sans-serif;
+      font-size:1.0em;
+      position:absolute;
+      left:15%;
+      top:22%;
+      width:60px;
+      height:60px;
+      opacity:1.0;
+      cursor:pointer;
+      background-color:white;
+    }
+   #restart{
+      font-family: sans-serif;
+      background-color:white;
+      font-size:1.0em;
+      position:absolute;
+      left:45%;
+      top:22%;
+      width:60px;
+      height:60px;
+      opacity:1.0;
+      cursor:pointer;
+
+    }
+
+
+  }
+  @media (min-width:341px) and (max-width: 364px){
+
+     #infographics {
+      background-color:white;
+      font-family: sans-serif;
+      font-size:1.2em;
+      background-color:white;
+      opacity:0.6;
+      color:black;
+      height:100%;
+      width:100%;
+    }
+
+   #toggle{
+      font-family: sans-serif;
+      font-size:1.0em;
+      position:relative;
+      left:25%;
+      top:65%;
+      width:80px;
+      height:80px;
+      opacity:1.0;
+      cursor:pointer;
+      background-color:white;
+    }
+   #restart{
+      font-family: sans-serif;
+      background-color:white;
+      font-size:1.0em;
+      position:relative;
+      left:50%;
+      top:66%;
+      width:70px;
+      height:70px;
+      opacity:1.0;
+      cursor:pointer;
+
+    }
+
+
+  }
+  @media (min-width:365px) and (max-width: 634px){
+
+     #infographics {
+      background-color:white;
+      font-family: sans-serif;
+      font-size:1.2em;
+      background-color:white;
+      opacity:0.8;
+      color:black;
+      height:100%;
+      width:100%;
+      position:relative;
+    }
+
+   #toggle{
+      font-family: sans-serif;
+      font-size:1.0em;
+      position:absolute;
+      left:15%;
+      top:30%;
+      width:100px;
+      height:100px;
+      opacity:1.0;
+      cursor:pointer;
+
+    }
+   #restart{
+      font-family: sans-serif;
+      font-size:1.0em;
+      position:absolute;
+      left:40%;
+      top:30%;
+      width:100px;
+      height:100px;
+      opacity:1.0;
+      cursor:pointer;
+
+    }
+
+
+  }
+  @media (min-width:635px) and (max-width: 650px){
+
+     #infographics {
+      background-color:white;
+      font-family: sans-serif;
+      font-size:1.2em;
+      background-color:white;
+      opacity:0.6;
+      color:black;
+      height:100%;
+      width:100%;
+    }
+
+   #toggle{
+      font-family: sans-serif;
+      font-size:1.0em;
+      position:absolute;
+      left:90%;
+      top:2%;
+      width:50px;
+      height:50px;
+      opacity:1.0;
+      cursor:pointer;
+      background-color:white;
+    }
+   #restart{
+      font-family: sans-serif;
+      background-color:white;
+      font-size:1.0em;
+      position:relative;
+      left:91%;
+      top:55%;
+      width:40px;
+      height:40px;
+      opacity:1.0;
+      cursor:pointer;
+
+    }
+
+
+  }
+  @media (min-width:651px) and (max-width: 749px){
+  #infographics {
+     font-family: sans-serif;
+     font-size:1.5em;
+     background-color:white;
+     opacity:0.6;
+     color:black;
+     width:100%;
+     height:100%;
+     border:1px solid black;
+     position:relative;
+   }
+
+  #toggle{
+     font-family: sans-serif;
+     font-size:1.0em;
+     position:absolute;
+     left:85%;
+     top:1%;
+     opacity:1.0;
+     cursor:pointer;
+     width:40px;
+     height:40px;
+   }
+  #restart{
+     font-family: sans-serif;
+     font-size:1.0em;
+     position:absolute;
+     left:86%;
+     top:52%;
+     opacity:1.0;
+     cursor:pointer;
+     width:30px;
+     height:30px;
+   }
+  }*/
+
+
+#infographics {
+   font-family: sans-serif;
+   font-size:2em;
+   background-color:white;
+   opacity:1;
+   color:black;
+   width:100%;
+   height:100%;
+   position:relative;
+
+ }
+.controls{
+  width:70%;
+  height:100px;
+  position:relative;
+  top:15%;
+  left:15%;
+  background:#fff url("http://img.webme.com/pic/c/cssplantillas/wmp11menu0.png");
+  border-radius: 20px;
+}
+#toggle{
+   font-family: sans-serif;
+   font-size:1.0em;
+   position:relative;
+   margin-left:15%;
+
+   opacity:1.0;
+   cursor:pointer;
+   width:30%;
+   height:100px;
+
+ }
+#restart{
+
+   font-family: sans-serif;
+   font-size:1.0em;
+   position:relative;
+   margin-left:10%;
+   top:-5px;
+   opacity:1.0;
+   cursor:pointer;
+   width:30%;
+   height:90px;
+ }
+
+  </style>
+  <div id="container">
+    <!--<img src="resource/images/pause.svg" />-->
+    <img src="resource/images/rewind.svg" />
+    <img src="resource/images/play.svg" />
+    <img src="resource/images/foward.svg" />
+    <paper-slider pin="" value="0" role="slider" tabindex="0" aria-valuemin="0" max="1561" aria-valuenow="0"></paper-slider>
+    </div>
+
+
+</template>
+
+
+
+
+
+<script>
+
+
+Polymer('mediascape-timeline', {
+  p:null,
+  eta:null,
+  created: function() {
+    console.log('Train controller component loaded')
+  },
+
+  ready: function() {
+
+    document.addEventListener ('motion-ready',this.smReady.bind(this));
+
+  },
+  smReady:function(){
+    this.sm = mediascape.Communication.sharedmotion();
+    if (!mediascape.Communication.getUrlVar('group'))  this.sm.mapp.motions.shared.update(0);
+/*    if (this.sm.mapp.motions.shared.vel == 0) {
+
+      this.$.toggle.setAttribute('src','../resources/wcs/mediascape-trainController/play-icon.png');
+    } else {
+
+      this.$.toggle.setAttribute('src','../resources/wcs/mediascape-trainController/pause-icon.png');
+    }
+*/
+  },
+  toggle:function(e){
+    e.stopPropagation();
+    if (this.sm.mapp.motions.shared.vel == 0) {
+      this.sm.mapp.motions.shared.update(null, 1);
+      this.$.toggle.setAttribute('src','../resources/wcs/mediascape-trainController/pause-icon.png');
+    } else {
+      this.sm.mapp.motions.shared.update(null, 0);
+      this.$.toggle.setAttribute('src','../resources/wcs/mediascape-trainController/play-icon.png');
+    }
+  },
+  velChange:function (e){
+      e.stopPropagation();
+      if (e.vel == 0) {
+        this.$.toggle.setAttribute('src','../resources/wcs/mediascape-trainController/play-icon.png');
+      } else {
+        this.$.toggle.setAttribute('src','../resources/wcs/mediascape-trainController/pause-icon.png');
+      }
+  },
+  beginning:function(e){
+    //e.stopPropagation();
+    this.sm.mapp.motions.shared.update(0);
+    this.$.toggle.setAttribute('src','../resources/wcs/mediascape-trainController/pause-icon.png');
+  },
+  prettyPrint:function(val){
+    // Convert time in seconds to X days, hours, minutes, seconds
+    var days = Math.floor(val / (60 * 60 * 24));
+    var hours = Math.floor((val - days * (60 * 60 * 24)) / (60 * 60));
+    var mins = Math.floor((val - days * (60 * 60 * 24) - hours * (60 * 60)) / (60));
+    var secs = Math.floor((val - days * (60 * 60 * 24) - hours * (60 * 60)) - mins * 60);
+    var s = "";
+    if (days > 1) s = days + " days ";
+    else if (days > 0) s = days + " day ";
+    if (hours > 1) s += hours + " hours ";
+    else if (hours > 0) s += hours + " hour ";
+    if (mins > 1) s += mins + " mins ";
+    else if (mins > 0) s += mins + " min ";
+    if (secs > 1) s += secs + " secs ";
+    else s += secs + " sec ";
+    return s;
+  },
+  play:function(){
+    this.sm.mapp.motions.shared.update(null, 1);
+  },
+  pause:function(){
+    this.sm.mapp.motions.shared.update(null, 0);
+  }
+
+});
+  </script>
+ </polymer-element>

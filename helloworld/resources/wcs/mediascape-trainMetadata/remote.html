@@ -1,0 +1,115 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mediscape Train demo remote</title>
+
+<!-- Import MSV library -->
+<script type="text/javascript" src="sharedmotion.js"></script>
+
+<script type="text/javascript" src="sharedstate.js"></script>
+<script type="text/javascript" src="sharedcontext.js"></script>
+
+<script src="next_stations.js"></script>
+
+<!-- Import Motion Corporation services -->
+<script type="text/javascript" src="http://www.mcorp.no/lib/mcorp-2.0.js"></script>
+
+<!-- Only needed if you use the testing context -->
+<script src="jquery-1.10.2.min.js"></script>
+
+<!-- Audio control -->
+<script type="text/javascript" src="http://www.mcorp.no/lib/magic-2.0.js"></script>
+
+<script type="text/javascript">
+function prettyPrint (val) {
+  // Convert time in seconds to X days, hours, minutes, seconds
+  var days = Math.floor(val / (60 * 60 * 24));
+  var hours = Math.floor((val - days * (60 * 60 * 24)) / (60 * 60));
+  var mins = Math.floor((val - days * (60 * 60 * 24) - hours * (60 * 60)) / (60));
+  var secs = Math.floor((val - days * (60 * 60 * 24) - hours * (60 * 60)) - mins * 60);
+  var s = "";
+  if (days > 1) s = days + " days ";
+  else if (days > 0) s = days + " day ";
+  if (hours > 1) s += hours + " hours ";
+  else if (hours > 0) s += hours + " hour ";
+  if (mins > 1) s += mins + " mins ";
+  else if (mins > 0) s += mins + " min ";
+  if (secs > 1) s += secs + " secs ";
+  else s += secs + " sec ";
+  return s;
+}
+var app = MCorp.app("4897528703504378478", {anon:true});
+
+app.run = function() {
+  // Load next station info for infographics
+  p = parser();
+  var eta = null;
+  p.parse(next_stations);
+  var c = TM.movingCursor(app.motions.shared, p);
+  c.on("change", function(e) {
+    $("#nextstation").html(e.value.entry.name);
+    eta = e.value.end;
+  });
+
+  app.motions.shared.on("timeupdate", function() {
+    if (eta != null && eta != Infinity) {
+      $("#eta").html(prettyPrint(eta - this.pos));
+    } else {
+      $("#eta").html("");      
+    }
+  });
+
+  app.motions.shared.on("change", function() {
+    if (this.vel == 0) {
+      $("#toggle").html("Play");
+    } else {      
+      $("#toggle").html("Pause");
+    }
+  })
+
+  // We want to get the state of other agents to see if we must adapt
+  MS.agentContext().setCapability("remote", "enabled");
+  appc = MS.applicationContext("ws://t0.mcorp.no:8080/traindemo", null);
+}
+
+window.onload = app.init;
+
+app.toggle = function () {
+  if (app.motions.shared.vel == 0) {
+    app.motions.shared.update(null, 1);
+  } else {
+    app.motions.shared.update(null, 0);
+  }
+}
+
+app.beginning = function() {
+    app.motions.shared.update(0);  
+}
+
+</script>
+<style>
+.infographics {
+  font-family: sans-serif;
+  font-size:1.5em;
+}
+
+.infographics .title {
+  font-size:2em;
+  font-weight:bold;
+}
+</style>
+
+</head>
+
+<body> 
+<div id="infographics" class="infographics">
+ Next station: <div class="title" id="nextstation"></div>
+ <div id="eta"></div>
+</div>
+
+<div class="controls">
+<button onclick="app.beginning()">Beginning</button>
+<button onclick="app.toggle()" id="toggle">Play</button>
+</div>
+</body>
+</html>
