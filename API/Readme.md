@@ -206,7 +206,7 @@ https://github.com/mediascape/UI-engine/tree/master/helloworld
 [Overview]: #overview
 [API]: #api
 [Layout Construction: Structure]: #layout-construction-structure
-[Layout Construction: Implementation]: #layout-construction:-implementation
-[Layout Construction: Validation]: #layout-construction:-validation
+[Layout Construction: Implementation]: #layout-construction-implementation
+[Layout Construction: Validation]: #layout-construction-validation
 [Example]: #example
 
