@@ -49,7 +49,7 @@ this.registerLayouts();
 ```
 **useLayout (layoutName)**
 
-It defines the layout with the one the system is initialized; in the STATIC mode, it is necessary because otherwise, it will be used the default one. Example:
+It defines the layout to be used when the system is initialised; it is mandatory in the STATIC mode. Otherwise, a default one will be used. Example:
 
 ```javascript
 UI.useLayout(‘pip’);
@@ -58,7 +58,7 @@ UI.useLayout(‘pip’);
 
 **onComponentsChange (components, commands)**
 
-It is a callback function that must be associated whenever a change of the components occurs. It receives as input parameters the components to be rendered and optionally, the commands sent by the multiDeviceAdaptation module. Example:
+It is a callback function associated whenever a change on any of the components happens. It receives as input parameters the components to be rendered and optionally, the commands sent by the multiDeviceAdaptation module. Example:
 
 ```javascript
 /* mda = multideviceAdaptation */
@@ -67,7 +67,7 @@ mda.on(‘update’, onComponentsChange);
 
 **onOrientationChange ()**
 
-If the orientation of the device changes, it will be possible to associate the event to this function. Every layout must have implemented this function, is not optional. Example:
+If the orientation of the device changes (e.g. from landscape to portrait), it is possible to associate the event to this function. Every layout must have implemented this function mandatorily. Example:
 
 ```javascript
 window.addEventListener(‘deviceorientation’,onOrientationChange,false);
