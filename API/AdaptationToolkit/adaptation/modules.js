@@ -35,7 +35,7 @@
 */
 
 define(
-  [	"mediascape/AdaptationToolkit/adaptation/multiDeviceAdaptation/mdadaptation",
+  [
   "mediascape/AdaptationToolkit/adaptation/UIAdaptation/UIAdaptation"
   ],
   function(){
