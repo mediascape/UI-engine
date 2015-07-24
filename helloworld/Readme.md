@@ -35,10 +35,19 @@ This script will:
 *Please dont execute it inside the git folder. Best practice is to download just the the `.sh` file and execute.*
 
 ### run
+
+#####Production
+
 After ensure the webserver is running you could run the UI-Engine helloworl at this URL:
 ```
     http://localhost/helloworld/
 ```
+
+#####Development
+```
+    http://localhost:8080/index.html
+```
+
 # Result
 
 Pip Layout
