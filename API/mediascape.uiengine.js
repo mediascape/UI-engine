@@ -17,7 +17,7 @@
       underscore:'../resources/libs/underscore-min',
       jquery: '../resources/libs/jquery-2.1.1.min',
       qrcode:'../resources/libs/qrcode.min',
-      namedwebsockets:'mediascape/lib/namedwebsockets'
+      namedwebsockets:'/js/lib/namedwebsockets'
     },
     waitSeconds:0
   });
