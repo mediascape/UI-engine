@@ -35,21 +35,6 @@ Or for static use
     UI.useLayout(‘pip’);
   },false);
 ```
-
-**registerLayouts()**
-
-It registers all the layouts that are sent as a parameter to the UIAdaptation module. It also validates the implementation of each one of the layouts.
-
-Example:
-
-It is used internally in the UIAdaptation module to record all the available layouts:
-
-```javascript
-define(
-  ["AdaptationToolkit/adaptation/UIAdaptation/layouts/pip"],
-…
-this.registerLayouts();
-```
 **useLayout (layoutName)**
 
 It defines the layout to be used when the system is initialised; it is mandatory in the STATIC mode. Otherwise, a default one will be used. Example:
