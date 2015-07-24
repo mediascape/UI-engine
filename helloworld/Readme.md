@@ -22,7 +22,7 @@ you will find an application based on three components that reorganize and rende
 
 #####Production
 Clone the repository to root folder of the webserver, or download it and extract the files into that folder.
-Ensure that index.html file has reference to the minimized javascript file
+Ensure that index.html file has reference to the [minimized javascript file](https://github.com/mediascape/UI-engine/blob/master/helloworld/js/mediascape.uiengine.min.js)
 
 #####Development
 Next to this file you will find a script called `deploy.sh`.  
