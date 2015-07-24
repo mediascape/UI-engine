@@ -1,6 +1,6 @@
 ##UI-Engine Hello World
 
-This HelloWorld shows UI-Engine [MediaScape project](http://mediascapeproject.eu/) in action. On this example,
+This HelloWorld shows UI-Engine of [MediaScape project](http://mediascapeproject.eu/) in action. On this example,
 you will find an application based on three components that reorganize and render contents responsive way depending on the capabilities of the device.
 
 ## Navigation
