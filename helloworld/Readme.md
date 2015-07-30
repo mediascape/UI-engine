@@ -54,37 +54,50 @@ Minify version is generated each time deploy.sh script is executed. It will loca
 
 # Result
 
+Six different layouts are available in order to show components in different ways:
+
 Pip Layout
 ---------
-
+The selected component is in fullscreen mode and the others are placed with a reduced size in a colum at the right side of the screen and over the fullscreen component. When a component from the column is clicked, it is changed to the fullscreen position.
 ![Pip](https://raw.githubusercontent.com/itamayo/mediascape-images/master/images/pip.png)
 
 Menu Layout
 ---------
+The selected component is in fullscreen and the rest are not showed. A menu that appears at the bottom of the screen whenever there is activity and showing the name of the remaining components. When a name is clicked, the associated component gets the fullscreen place.
 ![Pip](https://raw.githubusercontent.com/mediascape/UI-engine/master/helloworld/images/menu.png)
 
 Accordion Layout
 ------------------
+All the components are showed at the same time imitating an accordion behaviour. At the beginnig, the screen is divided in equal size vertical areas, one for each component. When the mouse is over a component, that component is expanded and the others shrink. Furthermore, when the component is clicked it gets fullscreen mode.
+
 ![Horizontal](https://raw.githubusercontent.com/mediascape/UI-engine/master/helloworld/images/Accordion.png)
 
 Grid Layout
 ------------------
+Having each component a given preferred size, the screen is divided in cells of different sizes, one for each component.
 ![grid](https://raw.githubusercontent.com/mediascape/UI-engine/master/helloworld/images/grid.png)
 
 VerticalMenu Layout
 ------------------
+The selected component is in fullscreen and the rest are not showed. A menu that appears at the top-right side of the screen whenever there is activity and showing the name of the remaining components. When a name is clicked, the associated component gets the fullscreen place.
+
 ![verticalMenu](https://raw.githubusercontent.com/mediascape/UI-engine/master/helloworld/images/verticalmenu.png)
 
 Spinner Layout
 ------------------
+A spinner is built with a small view of each one of the available components. The rotating movement of the spinner is controlled by left/right direction arrows. When a component is clicked, it takes the fullscreen mode.
 ![spinner](https://raw.githubusercontent.com/mediascape/UI-engine/master/helloworld/images/spinner.png)
+
+All the previous layouts can also be used in other devices:
 
 On Tablet
 ------------------
+Accordion layout on a tablet.
 ![tablet](https://raw.githubusercontent.com/mediascape/UI-engine/master/helloworld/images/accordion-tablet.png)
 
 On Mobile
 ------------------
+Horizontal layout on a mobile.
 ![mobile](https://raw.githubusercontent.com/mediascape/UI-engine/master/helloworld/images/horizontalMobil.png)
 
 [Installation]: #installation
