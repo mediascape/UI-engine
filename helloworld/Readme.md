@@ -40,12 +40,12 @@ This script will:
 
 After ensure the webserver is running you could run the UI-Engine helloworl at this URL:
 ```
-    http://localhost/helloworld/
+    http://localhost/UI-engine/helloworld/
 ```
 
 #####Development
 ```
-    http://localhost:8080/index.html
+    http://localhost:8080/dev.html
 ```
 
 # Result
