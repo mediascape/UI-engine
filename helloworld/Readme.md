@@ -91,5 +91,5 @@ On Mobile
 [Prerequisite]: #prerequisite
 [Deployment]: #deployment
 [Run]: #run
-[Minify]: #Minify
+[Minify]: #minify
 [Result]: #result
