@@ -4,7 +4,7 @@ This HelloWorld shows UI-Engine of [MediaScape project](http://mediascapeproject
 you will find an application based on three components that reorganize and render contents responsive way depending on the capabilities of the device.
 
 ## Navigation
-[Installation][] | [Prerequisite][] | [Deployment][]  | [Run][] | [Minimized version][] [Result][]
+[Installation][] | [Prerequisite][] | [Deployment][]  | [Run][] | [Minimized version][] | [Result][]
 
 ###Installation
 ####Prerequisite
