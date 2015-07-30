@@ -22,7 +22,7 @@ This example provides two ways to run it: 'Production' and 'Development'. Use 'P
 ####Deployment
 
 #####Production
-Clone the repository to root folder of the webserver, or download it and extract the files into that folder.
+Clone the repository to the root folder of a Web server, or download it and extract the files into that folder.
 Ensure that index.html file has reference to the [minimized javascript file](https://github.com/mediascape/UI-engine/blob/master/helloworld/js/mediascape.uiengine.min.js)
 
 #####Development
