@@ -71,6 +71,7 @@ cp -R $Folder/application-context/Server/* $InstallFolder/
 cp -R $Folder/UI-engine/helloworld/* $InstallFolder/www/
 cp -R $Folder/UI-engine/API $InstallFolder/www/js/mediascape/
 cp -R $Folder/UI-engine/API/mediascape.uiengine.js $InstallFolder/www/
+cp -R $Folder/UI-engine/API/build.js $InstallFolder/www/
 cp -R $Folder/application-context/API/* $InstallFolder/www/js/
 cp -R $Folder/discovery-self/API/mediascape/Discovery $InstallFolder/www/js/mediascape/
 cp -R $Folder/discovery-self/API/mediascape/lib/* $InstallFolder/www/js/lib/
@@ -84,5 +85,10 @@ fi
 cd $InstallFolder/
 echo "Installing dependencies..."
 npm install
+npm install -g requirejs
+cd $InstallFolder/www/
+echo "Minimizing mediascape.uiengine.js ..."
+r.js -o build.js
+cd $InstallFolder
 echo "Start the Node.js Server..."
 $nodeCommand index.js
