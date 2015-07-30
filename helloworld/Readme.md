@@ -1,7 +1,6 @@
 ##UI-Engine Hello World
 
-This HelloWorld shows UI-Engine of [MediaScape project](http://mediascapeproject.eu/) in action. On this example,
-you will find an application based on three components that reorganize and render contents responsive way depending on the capabilities of the device.
+This Hello World example shows how the UI-Engine API of the [MediaScape project](http://mediascapeproject.eu/) works on a basic way. On this example, you will find an application with three elements (Web Components) and the UI-Engine (User Interface Engine) creates a layout organising the elements on a responsive interface.
 
 ## Navigation
 [Installation][] | [Prerequisite][] | [Deployment][]  | [Run][] | [Minify][] | [Result][]
