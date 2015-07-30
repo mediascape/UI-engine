@@ -4,7 +4,7 @@ This HelloWorld shows UI-Engine of [MediaScape project](http://mediascapeproject
 you will find an application based on three components that reorganize and render contents responsive way depending on the capabilities of the device.
 
 ## Navigation
-[Installation][] | [Prerequisite][] | [Deployment][]  | [Run][] | [Minimized][] | [Result][]
+[Installation][] | [Prerequisite][] | [Deployment][]  | [Run][] | [MinifyVersion][] | [Result][]
 
 ###Installation
 ####Prerequisite
@@ -48,7 +48,7 @@ After ensure the webserver is running you could run the UI-Engine helloworl at t
     http://localhost:8080/dev.html
 ```
 
-###Minimized version
+###MinifyVersion
 
 Minimized version is generated each time deploy.sh script is executed. It will locates at www/ folder.
 
@@ -91,4 +91,5 @@ On Mobile
 [Prerequisite]: #prerequisite
 [Deployment]: #deployment
 [Run]: #run
+[MinifyVersion]: #MinifyVersion
 [Result]: #result
