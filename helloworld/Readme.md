@@ -75,12 +75,12 @@ All the components are showed at the same time imitating an accordion behaviour.
 
 Grid Layout
 ------------------
-Having each component a given preferred size and the order, the screen is divided in cells of different sizes, one for each component.
+Having each component a given preferred size and the order, the screen is divided in cells of different sizes. The Grid layout iterates across the components with a priority-based order, and goes over the layout matrix from left to right and from top to down, filling empty slots with unplaced components.
 ![grid](https://raw.githubusercontent.com/mediascape/UI-engine/master/helloworld/images/grid.png)
 
 VerticalMenu Layout
 ------------------
-The selected component is in fullscreen and the rest are not showed. A menu that appears at the top-right side of the screen whenever there is activity and showing the name of the remaining components. When a name is clicked, the associated component gets the fullscreen place.
+The selected component is in fullscreen and the rest are not showed. A menu appears at the top-right side of the screen whenever there is activity, showing the name of the remaining components. When a name is clicked, the associated component gets the fullscreen place.
 
 ![verticalMenu](https://raw.githubusercontent.com/mediascape/UI-engine/master/helloworld/images/verticalmenu.png)
 
