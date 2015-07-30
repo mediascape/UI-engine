@@ -24,6 +24,7 @@
   /** Wait to be all ready, then init UIEngine **/
 
   document.addEventListener('adaptationToolkit-ready',function(data){
+    mediascape.AdaptationToolkit.uiComponents.loadingPanel('/resources/images/mediascape_logo.png',4);
     var UI = mediascape.AdaptationToolkit.Adaptation.UIAdaptation;
     UI.init(data.detail.components,UI.LAYOUTMODE.ADAPTABLE);
     //UI.useLayout('menu');
