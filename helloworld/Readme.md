@@ -6,6 +6,7 @@ This Hello World example shows how the UI-Engine API of the [MediaScape project]
 [Installation][] | [Prerequisite][] | [Deployment][]  | [Run][] | [Minify][] | [Result][]
 
 ###Installation
+This example provides two ways to run it. We called 'Production' to the way of downloading a minimised code prepared to be run on a Web Server for a quicly deployment. 
 ####Prerequisite
 #####Production
 * WebServer (example:apache)
