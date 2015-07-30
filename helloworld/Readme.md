@@ -48,7 +48,7 @@ After ensure the webserver is running you could run the UI-Engine helloworl at t
     http://localhost:8080/dev.html
 ```
 
-### MinifyVersion
+### Minify
 
 Minify version is generated each time deploy.sh script is executed. It will locates at www/ folder.
 
