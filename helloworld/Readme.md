@@ -88,6 +88,18 @@ Spinner Layout
 A spinner is built with a small view of each one of the available components. The rotating movement of the spinner is controlled by left/right direction arrows. When a component is clicked, it takes the fullscreen mode.
 ![spinner](https://raw.githubusercontent.com/mediascape/UI-engine/master/helloworld/images/spinner.png)
 
+Horizontal Layout
+------------------
+The screen is divided into equal size horizontal areas, one for each component. The components will be ordered taking into account the priority from the top to the bottom.
+
+![horizontal](https://raw.githubusercontent.com/mediascape/UI-engine/master/helloworld/images/horizontal.png)
+
+ScrollHorizontal Layout
+------------------
+The selected component is in fullscreen and the rest are not showed. It is possible to drag the components in both directions, from the top to the bottom, or from the bottom to the top of the screen, simulating a vertical carousel and changing the component that is in fullscreen. There are also two arrows (up/down) in order to control the mentioned carousel by clicking them. 
+
+![scrollHorizontal](https://raw.githubusercontent.com/mediascape/UI-engine/master/helloworld/images/scrollHorizontal.png)
+
 All the previous layouts can also be used in other devices:
 
 On Tablet
