@@ -6,11 +6,12 @@ This Hello World example shows how the UI-Engine API of the [MediaScape project]
 [Installation][] | [Prerequisite][] | [Deployment][]  | [Run][] | [Minify][] | [Result][]
 
 ###Installation
-This example provides two ways to run it. We called 'Production' to the way of downloading a minimised code prepared to be run on a Web Server for a quicly deployment. 
-####Prerequisite
+This example provides two ways to run it: 'Production' and 'Development'. Use 'Production' to a quick deployment on a Web server to rapidly see how it works. Use 'Development' if you want to go deeper in the code and add more functionalities to the Hello World example.
+
+####Prerequisites
 #####Production
 * WebServer (example:apache)
-* Chrome (web platform flag activated, for now)
+* Google Chrome Web browser (Currently ir requires to activate the Web Platform flag in chrome://flags/ )
 
 #####Development
 * Install git
