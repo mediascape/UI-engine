@@ -23,23 +23,23 @@ This example provides two ways to run it: 'Production' and 'Development'. Use 'P
 
 #####Production
 Clone the repository to the root folder of a Web server, or download it and extract the files into that folder.
-Ensure that index.html file has reference to the [minimized javascript file](https://github.com/mediascape/UI-engine/blob/master/helloworld/js/mediascape.uiengine.min.js)
+Ensure that index.html file has the reference to the [minimized javascript file](https://github.com/mediascape/UI-engine/blob/master/helloworld/js/mediascape.uiengine.min.js)
 
 #####Development
-Next to this file you will find a script called `deploy.sh`.  
+Download the `deploy.sh` script (it works for Linux).  
 This script will:
 
 1. clone the git and install everything in a folder called `deploy` relative to the file itsself
 2. copy the [server](https://github.com/mediascape/application-context/tree/master/Server) and [Discovery API](https://github.com/mediascape/discovery-self/tree/master/API) including this HelloWorld sample
 3. install all needed dependencies for the backend and start a small setup-script to configure it.
 
-*Please dont execute it inside the git folder. Best practice is to download just the the `.sh` file and execute.*
+*Please dont execute it inside the git folder. The best practice is to download just the `.sh` file and execute it.*
 
 ### run
 
 #####Production
 
-After ensure the webserver is running you could run the UI-Engine helloworl at this URL:
+Run the Web server and find the Hello World at::
 ```
     http://localhost/UI-engine/helloworld/
 ```
@@ -51,31 +51,31 @@ After ensure the webserver is running you could run the UI-Engine helloworl at t
 
 ### Minify
 
-Minify version is generated each time deploy.sh script is executed. It will locates at www/ folder.
+The minified version for the 'Production' is generated each time the deploy.sh script is executed. It will locate it at www/ folder.
 
 # Result
 
-Six different layouts are available in order to show components in different ways:
+Six different layouts are available in order to show the components in different organisations:
 
 Pip Layout
 ---------
-The selected component is in fullscreen mode and the others are placed with a reduced size in a colum at the right side of the screen and over the fullscreen component. When a component from the column is clicked, it is changed to the fullscreen position.
+The component with the higher order is in fullscreen mode and the others are placed with a reduced size in a column at the right side of the screen and over the fullscreen component. When a component from the column is clicked, it is changed to the fullscreen position.
 ![Pip](https://raw.githubusercontent.com/itamayo/mediascape-images/master/images/pip.png)
 
 Menu Layout
 ---------
-The selected component is in fullscreen and the rest are not showed. A menu that appears at the bottom of the screen whenever there is activity and showing the name of the remaining components. When a name is clicked, the associated component gets the fullscreen place.
+The selected component is in fullscreen and the rest are not showed. A menu appears at the bottom of the screen whenever there is activity on the browser. When a name in the menu is clicked, the associated component gets the fullscreen place.
 ![Pip](https://raw.githubusercontent.com/mediascape/UI-engine/master/helloworld/images/menu.png)
 
 Accordion Layout
 ------------------
 All the components are showed at the same time imitating an accordion behaviour. At the beginnig, the screen is divided in equal size vertical areas, one for each component. When the mouse is over a component, that component is expanded and the others shrink. Furthermore, when the component is clicked it gets fullscreen mode.
 
-![Horizontal](https://raw.githubusercontent.com/mediascape/UI-engine/master/helloworld/images/Accordion.png)
+![Accordion](https://raw.githubusercontent.com/mediascape/UI-engine/master/helloworld/images/Accordion.png)
 
 Grid Layout
 ------------------
-Having each component a given preferred size, the screen is divided in cells of different sizes, one for each component.
+Having each component a given preferred size and the order, the screen is divided in cells of different sizes, one for each component.
 ![grid](https://raw.githubusercontent.com/mediascape/UI-engine/master/helloworld/images/grid.png)
 
 VerticalMenu Layout
