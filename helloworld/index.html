@@ -22,9 +22,7 @@
 <script>
 
   /** Wait to be all ready, then init UIEngine **/
-  document.addEventListener('mediascape-modules-ready',function(ev){
-      mediascape.AdaptationToolkit.uiComponents.loadingPanel('/resources/images/mediascape_logo.png',4);
-  });
+
   document.addEventListener('adaptationToolkit-ready',function(data){
     var UI = mediascape.AdaptationToolkit.Adaptation.UIAdaptation;
     UI.init(data.detail.components,UI.LAYOUTMODE.ADAPTABLE);
