@@ -98,7 +98,7 @@ ScrollHorizontal Layout
 ------------------
 The selected component is in fullscreen and the rest are not showed. It is possible to drag the components in both directions, from the top to the bottom, or from the bottom to the top of the screen, simulating a vertical carousel and changing the component that is in fullscreen. There are also two arrows (up/down) in order to control the mentioned carousel by clicking them. 
 
-![scrollHorizontal](https://raw.githubusercontent.com/mediascape/UI-engine/master/helloworld/images/scrollHorizontal.png)
+![scrollHorizontal](https://raw.githubusercontent.com/mediascape/UI-engine/master/helloworld/images/scrollHorizontal2.png)
 
 All the previous layouts can also be used in other devices:
 
