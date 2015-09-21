@@ -8,6 +8,6 @@
       namedwebsockets:'lib/namedwebsockets'
     },
     name: "mediascape.uiengine.js",
-    out: "mediascape.uiengine.min.js",
+    out: "js/mediascape.uiengine.min.js",
     removeCombined: true
 })
