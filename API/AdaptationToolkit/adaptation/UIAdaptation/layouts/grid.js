@@ -103,7 +103,6 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
     grid.unload = function(cmps){}
 
     grid.__moduleName = "gridLayout";
-    console.log(grid);
     return grid;
 
   });

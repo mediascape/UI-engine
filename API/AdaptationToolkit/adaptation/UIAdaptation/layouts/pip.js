@@ -6,7 +6,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
     pip.onComponentsChange = function (cmps){
         console.log("test");
     this.cmps = cmps;
-        var components = mediascape.AdaptationToolkit.componentManager.core.getComponents();
+      var components = mediascape.AdaptationToolkit.componentManager.core.getComponents();
       for(var i=0;i<components.length;i++){
         components[i].style.width='';
         components[i].style.height='';
@@ -23,10 +23,10 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
         components[i].style.borderLeft='';
         components[i].style.animationName='';
         components[i].style.animationDuration='';
-        components[i].style.display='block';
+        //components[i].style.display='block';
 
         components[i].style.left='';
-        components[i].style.transformOrigin= ''; 
+        components[i].style.transformOrigin= '';
         components[i].style.outline='';
         components[i].style.transform='';
 
@@ -67,7 +67,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
                                                     componentsContainer.querySelector('figure'));
         }
         componentsContainer.querySelector('figure').parentNode.removeChild(componentsContainer.querySelector('figure'));
-
+        document.querySelector('x-media').play();
       }
       if(componentsContainer.querySelector('#arrows')){
         componentsContainer.removeChild(componentsContainer.querySelector('#arrows'));
@@ -108,12 +108,12 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
       }
 
       for(var i=0;i<cmps.length;i++){
-        cmps[i].removeEventListener('holding',holding,true);
+        cmps[i].removeEventListener('hold',holding,true);
 
       }
      for(var i=0;i<cmps.length;i++){
-        Polymer.addEventListener(cmps[i],'holding',holding,false);
-        pip.listeners.push();
+        Polymer.addEventListener(cmps[i],'hold',holding,false);
+        pip.listeners.push(holding);
       }
 
 
@@ -132,10 +132,10 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
 
 
 
-      var a=width-60-Math.round(0.2*width);
-      var b=Math.round(width*0.2);
+      var a=width-20-Math.round(0.33*width);
+      var b=Math.round(width*0.33);
 
-      container.style.gridTemplateColumns=a+'px '+b+'px 30px';
+      container.style.gridTemplateColumns=a+'px '+b+'px ';
 
       var col_cmps=cmps.length-1;
       var height = window.innerHeight ||document.documentElement.clientHeight ||document.body.clientHeight;
@@ -167,13 +167,13 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
 
       var heights=[];
       var total_height=10;
-      heights.push(10);
+      heights.push(20);
 
       var enough=true;
 
       for(var i=0;i<col_cmps;i++){
           comp_height=b*cmpsToColumn[i].lproperties.propy/cmpsToColumn[i].lproperties.propx;
-          if(total_height+comp_height+10>height-40){
+          if(total_height+comp_height+10>height-0){
             enough=false;
             break;
           }
@@ -191,10 +191,10 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
         }
 
           fullScreenCmp.style.gridColumn='1/span 3';
-          fullScreenCmp.style.width=(width-30)+'px';
-          fullScreenCmp.style.height=(height-40)+'px';
+          fullScreenCmp.style.width=(width+10)+'px';
+          fullScreenCmp.style.height=(height+10)+'px';
           fullScreenCmp.style.gridRow='1/span '+heights.length;
-          fullScreenCmp.style.backgroundColor='black';
+          fullScreenCmp.style.backgroundColor='white';
           fullScreenCmp.style.zIndex='1';
 
         for(var i=0;i<col_cmps;i++){
@@ -210,16 +210,17 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
 
 
         }
+        
 
       }
       else{
         var row_height=parseInt((height-70)/(col_cmps))-10;
-        container.style.gridTemplateRows='10px repeat('+col_cmps+','+row_height+'px 10px) 10px';
+        container.style.gridTemplateRows='20px repeat('+col_cmps+','+row_height+'px 10px) 10px';
         fullScreenCmp.style.gridColumn='1/span 3';
-        fullScreenCmp.style.width=(width-30)+'px';
-        fullScreenCmp.style.height=(height-40)+'px';
+        fullScreenCmp.style.width=(width+10)+'px';
+        fullScreenCmp.style.height=(height+10)+'px';
         fullScreenCmp.style.gridRow='1/span '+heights.length;
-        fullScreenCmp.style.backgroundColor='black';
+        fullScreenCmp.style.backgroundColor='white';
         fullScreenCmp.style.zIndex='1';
 
         for(var i=0;i<col_cmps;i++){
@@ -236,6 +237,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
 
       }
 
+      mediascape.AdaptationToolkit.Adaptation.UIAdaptation.updateComponentQuery();
 
 
 
@@ -265,7 +267,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
         cmps[i].style.display='block';
 
         cmps[i].style.left='';
-        cmps[i].style.transformOrigin= ''; 
+        cmps[i].style.transformOrigin= '';
         cmps[i].style.outline='';
         cmps[i].style.transform='';
 
@@ -297,16 +299,11 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
       if(document.querySelector('#upArrowImg')!=null){
           document.body.removeChild(document.querySelector('#upArrowImg'));
       }
-      this.render(cmps);
 
 
-      if(document.querySelector('#customizePanel')!=null){
-        document.body.removeChild(document.querySelector('#customizePanel'));
-        if(document.querySelector('drag-resize')!=null){
-          componentsContainer.removeChild(document.querySelector('drag-resize'));
-        }
-      }
+
       
+
       if(componentsContainer.querySelector('figure')){
         while (componentsContainer.querySelector('figure').firstChild)
         {
@@ -314,7 +311,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
                                                     componentsContainer.querySelector('figure'));
         }
         componentsContainer.querySelector('figure').parentNode.removeChild(componentsContainer.querySelector('figure'));
-
+        document.querySelector('x-media').play();
       }
       if(componentsContainer.querySelector('#arrows')){
         componentsContainer.removeChild(componentsContainer.querySelector('#arrows'));
@@ -324,6 +321,13 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
       }
 
       this.render(cmps);
+
+      if(document.querySelector('#customizePanel')!=null){
+        document.body.removeChild(document.querySelector('#customizePanel'));
+        if(document.querySelector('drag-resize')!=null){
+          componentsContainer.removeChild(document.querySelector('drag-resize'));
+        }
+      }
        mediascape.AdaptationToolkit.Adaptation.UIAdaptation.updateComponentQuery();
        var scope=this;
       var timer1=0;
@@ -382,8 +386,9 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
     pip.unload = function(cmps){
       pip.listeners.forEach (function(listener){
       for(var i=0;i<cmps.length;i++){
-        cmps[i].removeEventListener('hold',listener,true);
-
+        Polymer.removeEventListener(cmps[i],'hold',listener,true);
+        Polymer.removeEventListener(cmps[i],'hold',listener,false);
+        cmps[i].removeEventListener('mouseup',listener,true);
       }
     },this);
     }
@@ -391,7 +396,6 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
 
 
     pip.__moduleName = "pipLayout";
-    console.log(pip);
     return pip;
 
   }

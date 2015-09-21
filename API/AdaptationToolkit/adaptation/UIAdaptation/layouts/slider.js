@@ -22,10 +22,10 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
         components[i].style.borderLeft='';
         components[i].style.animationName='';
         components[i].style.animationDuration='';
-        components[i].style.display='block';
+        //components[i].style.display='block';
 
         components[i].style.left='';
-        components[i].style.transformOrigin= ''; 
+        components[i].style.transformOrigin= '';
         components[i].style.outline='';
         components[i].style.transform='';
 
@@ -64,6 +64,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
                                                     componentsContainer.querySelector('figure'));
         }
         componentsContainer.querySelector('figure').parentNode.removeChild(componentsContainer.querySelector('figure'));
+        document.querySelector('x-media').play();
 
       }
       if(componentsContainer.querySelector('#arrows')){
@@ -84,7 +85,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
     slider.render = function (cmps){
 
       var components = mediascape.AdaptationToolkit.componentManager.core.getComponents();
-     
+
       for(var i=0;i<components.length;i++){
         components[i].className='';
         components[i].style.width='';
@@ -262,6 +263,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
                                                     componentsContainer.querySelector('figure'));
         }
         componentsContainer.querySelector('figure').parentNode.removeChild(componentsContainer.querySelector('figure'));
+        document.querySelector('x-media').play();
 
       }
       if(componentsContainer.querySelector('#arrows')){
@@ -291,7 +293,6 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
     }
 
     slider.__moduleName = "sliderLayout";
-    console.log(slider);
     return slider;
 
   });

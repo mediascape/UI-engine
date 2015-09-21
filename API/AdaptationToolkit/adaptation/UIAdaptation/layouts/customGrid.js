@@ -22,10 +22,10 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
         components[i].style.borderLeft='';
         components[i].style.animationName='';
         components[i].style.animationDuration='';
-        components[i].style.display='block';
+        //components[i].style.display='block';
 
         components[i].style.left='';
-        components[i].style.transformOrigin= ''; 
+        components[i].style.transformOrigin= '';
         components[i].style.outline='';
         components[i].style.transform='';
 
@@ -48,6 +48,9 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
             componentsContainer.removeChild(document.querySelector('#name'+components[i].id));
         }
       }
+      if(document.querySelector('#menu')!=null){
+          document.body.removeChild(document.querySelector('#menu'));
+      }
       if(document.querySelector('#downArrowImg')!=null){
           document.body.removeChild(document.querySelector('#downArrowImg'));
       }
@@ -61,6 +64,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
                                                     componentsContainer.querySelector('figure'));
         }
         componentsContainer.querySelector('figure').parentNode.removeChild(componentsContainer.querySelector('figure'));
+        document.querySelector('x-media').play();
 
       }
       if(componentsContainer.querySelector('#arrows')){
@@ -77,9 +81,9 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
           componentsContainer.removeChild(document.querySelector('drag-resize'));
         }
       }
-      
 
-      
+
+
 
       var enableResizeCallback= function(){
         if(document.querySelector('drag-resize')!=null){
@@ -195,7 +199,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
 
 
         cmps[i].style.left='';
-        cmps[i].style.transformOrigin= ''; 
+        cmps[i].style.transformOrigin= '';
         cmps[i].style.outline='';
         cmps[i].style.transform='';
 
@@ -234,7 +238,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
                                                     componentsContainer.querySelector('figure'));
         }
         componentsContainer.querySelector('figure').parentNode.removeChild(componentsContainer.querySelector('figure'));
-
+        document.querySelector('x-media').play();
       }
       if(componentsContainer.querySelector('#arrows')){
         componentsContainer.removeChild(componentsContainer.querySelector('#arrows'));
@@ -250,7 +254,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
           componentsContainer.removeChild(document.querySelector('drag-resize'));
         }
       }
-      
+
 
 
 
@@ -325,7 +329,6 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
 
     }
     customGrid.__moduleName = "customGridLayout";
-    console.log(customGrid);
     return customGrid;
 
   });

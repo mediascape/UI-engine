@@ -84,7 +84,6 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
 
 
     explicit.__moduleName = "explicitLayout";
-    console.log(explicit);
     return explicit;
 
   });

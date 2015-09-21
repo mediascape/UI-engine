@@ -6,6 +6,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
     var selectedComponent='';
     var upTimer='';
     var downTimer='';
+    var timer='';
     verticalMenu.onComponentsChange = function (cmps){
         console.log("test");
         this.cmps = cmps;
@@ -26,15 +27,15 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
         components[i].style.borderLeft='';
         components[i].style.animationName='';
         components[i].style.animationDuration='';
-        components[i].style.display='block';
+        //components[i].style.display='block';
 
         components[i].style.left='';
-        components[i].style.transformOrigin= ''; 
+        components[i].style.transformOrigin= '';
         components[i].style.outline='';
         components[i].style.transform='';
 
       }
-      
+
       componentsContainer.style.backgroundColor='';
       componentsContainer.style.perspective='';
       if(document.querySelector('#layout_classes')!=null){
@@ -69,7 +70,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
                                                     componentsContainer.querySelector('figure'));
         }
         componentsContainer.querySelector('figure').parentNode.removeChild(componentsContainer.querySelector('figure'));
-
+        document.querySelector('x-media').play();
       }
       if(componentsContainer.querySelector('#arrows')){
         componentsContainer.removeChild(componentsContainer.querySelector('#arrows'));
@@ -118,7 +119,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
     div.style.fontFamily='Nunito, arial, verdana';
 
     div.style.top=0;
-    div.style.right=0;    
+    div.style.right=0;
     div.style.zIndex="999";
 
     var h3=document.createElement('h3');
@@ -164,7 +165,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
 
         function unhoverFunc(event){
           if(a.innerHTML!==selectedComponent)
-          a.style.borderLeft='';          
+          a.style.borderLeft='';
           a.style.background='';
         }
 
@@ -173,18 +174,18 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
           if(a.innerHTML!==selectedComponent)
           a.style.borderLeft='5px solid lightgreen';
         }
-        
+
         function clickFunc(event){
           componentsContainer.querySelector('#'+event.srcElement.innerHTML).style.display='block';
           a.style.borderLeft='5px solid red';
           selectedComponent=event.srcElement.innerHTML;
-         
+
           for(var i=0;i<ordered_cmps.length;i++){
             if(ordered_cmps[i].id!==event.srcElement.innerHTML){
               ordered_cmps[i].style.display='none';
                document.querySelector('#menu').querySelectorAll('a')[i].style.borderLeft='';
             }
-           
+
           }
 
         }
@@ -247,7 +248,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
         cmps[i].style.display='block';
 
         cmps[i].style.left='';
-        cmps[i].style.transformOrigin= ''; 
+        cmps[i].style.transformOrigin= '';
         cmps[i].style.outline='';
         cmps[i].style.transform='';
 
@@ -286,6 +287,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
                                                     componentsContainer.querySelector('figure'));
         }
         componentsContainer.querySelector('figure').parentNode.removeChild(componentsContainer.querySelector('figure'));
+        document.querySelector('x-media').play();
 
       }
       if(componentsContainer.querySelector('#arrows')){
@@ -302,16 +304,16 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
           componentsContainer.removeChild(document.querySelector('drag-resize'));
         }
       }
-      
 
-      
+
+
     }
     verticalMenu.onResizeEvent=function(cmps){
-      
+
       var width = window.innerWidth ||document.documentElement.clientWidth ||document.body.clientWidth;
       var height = window.innerHeight ||document.documentElement.clientHeight ||document.body.clientHeight;
       for(var i=0;i<cmps.length;i++){
-  
+
       cmps[i].style.width=width+'px';
       cmps[i].style.height=height+'px';
 
@@ -328,16 +330,16 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
         }
         },1000);
 
-      var timer=setTimeout(function(){
+      this.timer=setTimeout(function(){
         document.querySelector('#menu').style.animationName='menuUp';
-        document.querySelector('#menu').style.animationDuration='1s'; 
+        document.querySelector('#menu').style.animationDuration='1s';
         this.upTimer=setTimeout(function(){
           document.querySelector('#menu').style.display='none';
         },500);
-             
+
 
        },3000);
-      return timer;
+      return this.timer;
     }
     verticalMenu.unload = function(cmps){
 
@@ -348,10 +350,11 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
             document.querySelector('#menu').querySelectorAll('a')[i].removeEventListener('mouseout',listener);
 
           }
-          
+
       },this);
       clearTimeout(this.downTimer);
       clearTimeout(this.upTimer);
+      clearTimeout(this.timer);
     }
 
 
@@ -359,7 +362,6 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
 
 
     verticalMenu.__moduleName = "verticalMenuLayout";
-    console.log(verticalMenu);
     return verticalMenu;
 
   });

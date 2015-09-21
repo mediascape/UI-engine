@@ -25,10 +25,10 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
         components[i].style.borderLeft='';
         components[i].style.animationName='';
         components[i].style.animationDuration='';
-        components[i].style.display='block';
+        //components[i].style.display='block';
 
         components[i].style.left='';
-        components[i].style.transformOrigin= ''; 
+        components[i].style.transformOrigin= '';
         components[i].style.outline='';
         components[i].style.transform='';
 
@@ -66,7 +66,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
                                                     componentsContainer.querySelector('figure'));
         }
         componentsContainer.querySelector('figure').parentNode.removeChild(componentsContainer.querySelector('figure'));
-
+        document.querySelector('x-media').play();
       }
       if(componentsContainer.querySelector('#arrows')){
         componentsContainer.removeChild(componentsContainer.querySelector('#arrows'));
@@ -85,11 +85,11 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
           componentsContainer.removeChild(document.querySelector('drag-resize'));
         }
       }
-      
 
-      
 
-      
+
+
+
 
     }
     spinner.render = function (cmps){
@@ -101,7 +101,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
       container.style.overflowX='';
 
       container.style.display='inline-block';
-      container.style.backgroundColor='black';
+      container.style.backgroundColor='white';
       var width = window.innerWidth ||document.documentElement.clientWidth ||document.body.clientWidth;
       var height = window.innerHeight ||document.documentElement.clientHeight ||document.body.clientHeight;
       container.style.width=width+'px';
@@ -163,28 +163,29 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
      for(var i=0;i<cmps.length;i++)
      {
         fig.appendChild(cmps[i]);
+        if(cmps[i].nodeName==='X-MEDIA')cmps[i].play();
         cmps[i].style.width='35%';
         cmps[i].style.height=cmpHeight;
         cmps[i].style.position='absolute';
         cmps[i].style.left='30%';
-        cmps[i].style.transformOrigin= '50% 50% -'+TO; 
+        cmps[i].style.transformOrigin= '50% 50% -'+TO;
         cmps[i].style.outline='1px solid transparent';
         cmps[i].style.transform='rotateY('+(0-i*deg)+'deg)';
 
         !function outer(i){
           function clickFunc(event){
 
-            
+
             event.srcElement.style.width=width+'px';
             event.srcElement.style.height=height+'px';
             event.srcElement.style.left='0%';
-            event.srcElement.style.transformOrigin= ''; 
+            event.srcElement.style.transformOrigin= '';
             event.srcElement.style.outline='';
             event.srcElement.style.transform='';
             event.srcElement.style.animationName='spinnerToFullscreen';
             event.srcElement.style.animationDuration='1s';
             event.srcElement.style.zIndex='9999';
-            event.srcElement.style.backgroundColor='black';
+            event.srcElement.style.backgroundColor='white';
             fig.style.transformStyle='';
             fig.style.minHeight='';
             fig.style.transformOrigin='';
@@ -206,7 +207,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
             fullScreenCmp=event.srcElement;
             mediascape.AdaptationToolkit.Adaptation.UIAdaptation.updateComponentQuery();
             !function outer(clickedCmp,i){
-               
+
               function backFunc(event){
                   clickedCmp.style.width='35%';
                   clickedCmp.style.height=cmpHeight;
@@ -217,8 +218,8 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
                   clickedCmp.style.zIndex='';
                   clickedCmp.style.backgroundColor='';
 
-                  
-                  
+
+
                   for(var j=0;j<cmps.length;j++){
                     if(i!==j){
                       cmps[j].style.display='block';
@@ -227,7 +228,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
                   fig.style.transformStyle='preserve-3d';
                   fig.style.minHeight='122px';
                   fig.style.transformOrigin='50% 50% -'+TO;
-                  
+
                   fig.style.transform='rotateY('+angle+'deg)';
                   fig.style.width='';
                   fig.style.height='';
@@ -238,9 +239,11 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
                   //clickedCmp.style.animationName='fullscreenToSpinner';
                   //clickedCmp.style.animationDuration='1s';
                   fig.style.transition='1s';
+                  clickedCmp.style.animationName='';
+                  clickedCmp.style.animationDuration='';
                   mediascape.AdaptationToolkit.Adaptation.UIAdaptation.updateComponentQuery();
                   setTimeout(function(){
-                      
+
                       clickedCmp.style.animationName='';
                       clickedCmp.style.animationDuration='';
                   },1500);
@@ -253,18 +256,15 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
           }
           Polymer.addEventListener(cmps[i],'hold',clickFunc);
         spinner.listeners.push(clickFunc);
-       
-         }(i); 
-        
 
-        
+         }(i);
+
+
+
      }
 
 
-
-
-
-     container.appendChild(fig);
+      container.appendChild(fig);
 
      if(container.querySelector('#arrows')){
         container.removeChild(container.querySelector('#arrows'));
@@ -272,58 +272,96 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
      var arrows=document.createElement('div');
      arrows.id='arrows';
      var left=document.createElement('img');
-     left.src='resources/images/previous.png';
+     left.src='resources/images/Previous-256.png';
      left.id='left';
+     left.style.opacity='1';
      var right=document.createElement('img');
-     right.src='resources/images/following.png';
+     right.src='resources/images/Next-256.png';
      right.id='right';
+     right.style.marginLeft='1%';
+     right.style.opacity='1';
+
+     Polymer.addEventListener(right,'mouseover',function(){
+        event.srcElement.style.opacity="0.5";
+     });
+      Polymer.addEventListener(right,'mouseleave',function(){
+        event.srcElement.style.opacity="1";
+     });
+
+      Polymer.addEventListener(left,'mouseover',function(){
+        event.srcElement.style.opacity="0.5";
+     });
+      Polymer.addEventListener(left,'mouseleave',function(){
+        event.srcElement.style.opacity="1";
+
+     });
+       Polymer.addEventListener(right,'up',function(){
+        right.style.opacity="0.5";
+        setTimeout(function(event){
+          right.style.opacity="1";
+
+
+        },1000);
+        
+     });
+
+      Polymer.addEventListener(left,'up',function(){
+        left.style.opacity="0.5";
+        setTimeout(function(event){
+          left.style.opacity="1";
+        },1000);
+     });
+
      arrows.appendChild(left);
      arrows.appendChild(right);
      arrows.style.position='absolute';
      arrows.style.bottom='100px';
-     arrows.style.width='10%';
-     left.style.width='50%';
+     arrows.style.width='15%';
+     left.style.width='49%';
      right.style.width='50%';
-     arrows.style.left='45%';
+     arrows.style.left='40%';
 
 
      function leftFunc(event){
-        galleryspin('-');
+        galleryspin('-',cmps);
 
      }
 
      function rightFunc(event){
-        galleryspin('');
+        galleryspin('',cmps);
      }
 
      Polymer.addEventListener(left,'tap',leftFunc);
      Polymer.addEventListener(right,'tap',rightFunc);
      spinner.listeners.push(leftFunc);
      spinner.listeners.push(rightFunc);
-     
 
 
-     
-    function galleryspin(sign) {
-      spinnerFig = document.querySelector("#spinnerFig");
-      if (!sign) { angle = angle + deg; } else { angle = angle - deg; }
-      spinnerFig.style.transform='rotateY('+ angle +'deg)';
-    }
+
+
+
 
 
 
 
      container.appendChild(arrows);
 
+     mediascape.AdaptationToolkit.Adaptation.UIAdaptation.updateComponentQuery();
 
 
 
 
 
-     
+
+    }
+    function galleryspin(sign,cmps) {
+      var deg=360/cmps.length;
+      spinnerFig = document.querySelector("#spinnerFig");
+      if (!sign) { angle = angle + deg; } else { angle = angle - deg; }
+      spinnerFig.style.transform='rotateY('+ angle +'deg)';
     }
     spinner.onOrientationChange = function (cmps){
-      console.log("test");
+      console.log("orientationCHANGED");
     }
    spinner.onLayoutChangeEvent = function (cmps){
       console.log("layout changed");
@@ -347,7 +385,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
         cmps[i].style.display='block';
 
         cmps[i].style.left='';
-        cmps[i].style.transformOrigin= ''; 
+        cmps[i].style.transformOrigin= '';
         cmps[i].style.outline='';
         cmps[i].style.transform='';
 
@@ -387,11 +425,12 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
                                                     componentsContainer.querySelector('figure'));
         }
         componentsContainer.querySelector('figure').parentNode.removeChild(componentsContainer.querySelector('figure'));
+        document.querySelector('x-media').play();
       }
 
-      
+
       if(componentsContainer.querySelector('#arrows')){
-        componentsContainer.removeChild(container.querySelector('#arrows'));
+        componentsContainer.removeChild(componentsContainer.querySelector('#arrows'));
       }
       if(componentsContainer.querySelector('#back')){
         componentsContainer.removeChild(componentsContainer.querySelector('#back'));
@@ -404,11 +443,11 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
           componentsContainer.removeChild(document.querySelector('drag-resize'));
         }
       }
-      
 
 
 
-     
+
+
 
     }
 
@@ -427,30 +466,51 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
       if(fullScreenCmp!==''){
         fullScreenCmp.fire('hold',this);
       }
-
-            
-      
-
-
-
-    }
+    },
+    spinner.onActivity = function(cmps,event){
+        if(fullScreenCmp===''){
+        if (event.type === "keydown"){
+            console.log(event);
+            event.preventDefault();
+            var left = document.querySelector('#left');
+            var right = document.querySelector('#right');
+            switch (event.keyIdentifier ){
+               case 'Right':
+                    galleryspin('',cmps);
+                    right.style.opacity=0.5;
+                    break;
+               case 'Up':
+                     galleryspin('',cmps);
+                     right.style.opacity=0.5;
+                     break;
+               case 'Left':
+                    galleryspin('-',cmps);
+                    left.style.opacity=0.5;
+                    break;
+               case 'Down':
+                     galleryspin('-',cmps);
+                     left.style.opacity=0.5;
+                     break;
+               default:console.warn('key event not identified at spinner');
+            }
+         setTimeout(function(){right.style.opacity=1;left.style.opacity=1;},500);
+        }
+      }
+    },
     spinner.unload = function(cmps){
       spinner.listeners.forEach (function(listener){
       for(var i=0;i<cmps.length;i++){
-       Polymer.removeEventListener(cmps[i],'hold',listener);
+       Polymer.removeEventListener(cmps[i],'hold',listener,true);
+       Polymer.removeEventListener(cmps[i],'hold',listener,false);
 
       }
       document.querySelector('#left').removeEventListener('tap',listener,true);
       document.querySelector('#right').removeEventListener('tap',listener,true);
       document.querySelector('#back').removeEventListener('tap',listener,true);
     },this);
-      
+
     }
     spinner.__moduleName = "spinnerLayout";
-    console.log(spinner);
     return spinner;
 
   });
-
-
-

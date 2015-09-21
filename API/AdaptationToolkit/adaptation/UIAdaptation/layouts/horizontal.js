@@ -22,10 +22,10 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
         components[i].style.borderLeft='';
         components[i].style.animationName='';
         components[i].style.animationDuration='';
-        components[i].style.display='block';
+        //components[i].style.display='block';
 
         components[i].style.left='';
-        components[i].style.transformOrigin= ''; 
+        components[i].style.transformOrigin= '';
         components[i].style.outline='';
         components[i].style.transform='';
 
@@ -64,6 +64,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
                                                     componentsContainer.querySelector('figure'));
         }
         componentsContainer.querySelector('figure').parentNode.removeChild(componentsContainer.querySelector('figure'));
+        document.querySelector('x-media').play();
 
       }
       if(componentsContainer.querySelector('#arrows')){
@@ -118,6 +119,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
         cmps[i].style.gridRow='span 1';
         cmps[i].style.backgroundColor='black';
      }
+     mediascape.AdaptationToolkit.Adaptation.UIAdaptation.updateComponentQuery();
 
     }
     horizontal.onOrientationChange = function (cmps){
@@ -147,7 +149,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
         cmps[i].style.display='block';
 
         cmps[i].style.left='';
-        cmps[i].style.transformOrigin= ''; 
+        cmps[i].style.transformOrigin= '';
         cmps[i].style.outline='';
         cmps[i].style.transform='';
 
@@ -187,6 +189,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
                                                     componentsContainer.querySelector('figure'));
         }
         componentsContainer.querySelector('figure').parentNode.removeChild(componentsContainer.querySelector('figure'));
+        document.querySelector('x-media').play();
 
       }
       if(componentsContainer.querySelector('#arrows')){
@@ -203,7 +206,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
           componentsContainer.removeChild(document.querySelector('drag-resize'));
         }
       }
-      
+
 
 
     }
@@ -221,7 +224,6 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
     horizontal.unload = function(cmps){}
 
     horizontal.__moduleName = "horizontalLayout";
-    console.log(horizontal);
     return horizontal;
 
   });

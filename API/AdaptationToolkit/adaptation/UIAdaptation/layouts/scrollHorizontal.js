@@ -25,10 +25,10 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
         components[i].style.borderLeft='';
         components[i].style.animationName='';
         components[i].style.animationDuration='';
-        components[i].style.display='block';
+        //components[i].style.display='block';
 
         components[i].style.left='';
-        components[i].style.transformOrigin= ''; 
+        components[i].style.transformOrigin= '';
         components[i].style.outline='';
         components[i].style.transform='';
 
@@ -67,6 +67,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
                                                     componentsContainer.querySelector('figure'));
         }
         componentsContainer.querySelector('figure').parentNode.removeChild(componentsContainer.querySelector('figure'));
+        document.querySelector('x-media').play();
 
       }
       if(componentsContainer.querySelector('#arrows')){
@@ -94,8 +95,8 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
 
       var width = window.innerWidth ||document.documentElement.clientWidth ||document.body.clientWidth;
       var height = window.innerHeight ||document.documentElement.clientHeight ||document.body.clientHeight;
-      width=width-30;  
-      
+      width=width-30;
+
       var upArrow=document.createElement('img');
       upArrow.id='upArrowImg';
       upArrow.src='../resources/images/carousel_arrow_up.jpg';
@@ -103,7 +104,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
       upArrow.style.left='45%';
       upArrow.style.position='absolute';
       upArrow.style.top=0;
-      
+
       document.body.appendChild(upArrow);
 
       var downArrow=document.createElement('img');
@@ -114,8 +115,8 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
       downArrow.style.position='absolute';
       downArrow.style.bottom=0;
 
-      
-      
+
+
       document.body.appendChild(downArrow);
 
       var ordered_cmps=[];
@@ -123,18 +124,18 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
       if (it1.lproperties.order > it2.lproperties.order) return 1;
       else return -1;
       });
-     
+
       this.idx=0;
 
      for(var i=0;i<ordered_cmps.length;i++)
-     {         
+     {
         if(i===0){
           ordered_cmps[i].style.display='block';
         }
         else{
           ordered_cmps[i].style.display='none';
-        }      
-        ordered_cmps[i].style.position='absolute'; 
+        }
+        ordered_cmps[i].style.position='absolute';
         ordered_cmps[i].style.width=width+'px';
         ordered_cmps[i].style.height=height+'px';
       }
@@ -144,10 +145,10 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
           ordered_cmps[i].style.animationName='';
            ordered_cmps[i].style.animationDuration="";
         }
-        
+
         scope.idx=scope.idx+1;
         if(scope.idx<=ordered_cmps.length-1){
-           
+
            ordered_cmps[scope.idx].style.animationName='UpIn';
            ordered_cmps[scope.idx].style.animationDuration="1s";
            ordered_cmps[scope.idx-1].style.animationName='UpOut';
@@ -156,12 +157,12 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
 
            ordered_cmps[scope.idx].style.display='block';
            var timer1=setTimeout(function(){
-            
+
            ordered_cmps[scope.idx-1].style.display='none';
           },2000);
            scrollHorizontal.timeouts.push(timer1);
-           
-           
+
+
         }
         else{
           scope.idx=0;
@@ -173,7 +174,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
 
            ordered_cmps[scope.idx].style.display='block';
            var timer2=setTimeout(function(){
-            
+
            ordered_cmps[ordered_cmps.length-1].style.display='none';
           },2000);
            scrollHorizontal.timeouts.push(timer2);
@@ -198,12 +199,12 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
 
            ordered_cmps[scope.idx].style.display='block';
            var timer3=setTimeout(function(){
-            
+
            ordered_cmps[scope.idx+1].style.display='none';
 
           },2000);
            scrollHorizontal.timeouts.push(timer3);
-          
+
         }
         else{
           scope.idx=ordered_cmps.length-1;
@@ -214,20 +215,20 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
 
           ordered_cmps[scope.idx].style.display='block';
           var timer4=setTimeout(function(){
-            
+
            ordered_cmps[0].style.display='none';
 
           },2000);
           scrollHorizontal.timeouts.push(timer4);
-          
+
         }
-     
+
       }
 
-      Polymer.addEventListener(upArrow,'tap',upArrowFunc);    
+      Polymer.addEventListener(upArrow,'tap',upArrowFunc);
       scrollHorizontal.listeners.push(upArrowFunc);
-      
-     
+
+
       for(var i=0;i<ordered_cmps.length;i++){
 
 
@@ -235,8 +236,8 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
 
 
           function trackendFunc(e){
-              if (e.yDirection>0){ //eskubi                 
-                       
+              if (e.yDirection>0){ //eskubi
+
                    for(var j=0;j<ordered_cmps.length;j++){
                       ordered_cmps[j].style.animationName='';
                       ordered_cmps[j].style.animationDuration="";
@@ -250,14 +251,14 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
 
                        ordered_cmps[scope.idx].style.display='block';
                        var timer5=setTimeout(function(){
-                        
+
                        ordered_cmps[scope.idx+1].style.display='none';
 
                       },2000);
                        scrollHorizontal.timeouts.push(timer5);
                     }
                     else{
-                      scope.idx=ordered_cmps.length-1;      
+                      scope.idx=ordered_cmps.length-1;
                       ordered_cmps[scope.idx].style.animationName='DownIn';
                        ordered_cmps[scope.idx].style.animationDuration="1s";
                        ordered_cmps[0].style.animationName='DownOut';
@@ -265,13 +266,13 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
 
                       ordered_cmps[scope.idx].style.display='block';
                       var timer6=setTimeout(function(){
-                        
+
                        ordered_cmps[0].style.display='none';
 
                       },2000);
                       scrollHorizontal.timeouts.push(timer6);
-                          
-                      
+
+
                     }
 
 
@@ -281,10 +282,10 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
                       ordered_cmps[j].style.animationName='';
                        ordered_cmps[j].style.animationDuration="";
                     }
-                    
+
                     scope.idx=scope.idx+1;
                     if(scope.idx<=ordered_cmps.length-1){
-                       
+
                        ordered_cmps[scope.idx].style.animationName='UpIn';
                        ordered_cmps[scope.idx].style.animationDuration="1s";
                        ordered_cmps[scope.idx-1].style.animationName='UpOut';
@@ -293,11 +294,11 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
 
                        ordered_cmps[scope.idx].style.display='block';
                        var timer7=setTimeout(function(){
-                        
+
                        ordered_cmps[scope.idx-1].style.display='none';
                       },2000);
                       scrollHorizontal.timeouts.push(timer7);
-                       
+
                     }
                     else{
                       scope.idx=0;
@@ -309,13 +310,13 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
 
                      ordered_cmps[scope.idx].style.display='block';
                      var timer8=setTimeout(function(){
-                      
+
                      ordered_cmps[ordered_cmps.length-1].style.display='none';
                     },2000);
                       scrollHorizontal.timeouts.push(timer8);
 
                    }
-                   
+
             }
           }
 
@@ -357,7 +358,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
 
 
         cmps[i].style.left='';
-        cmps[i].style.transformOrigin= ''; 
+        cmps[i].style.transformOrigin= '';
         cmps[i].style.outline='';
         cmps[i].style.transform='';
 
@@ -397,7 +398,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
                                                     componentsContainer.querySelector('figure'));
         }
         componentsContainer.querySelector('figure').parentNode.removeChild(componentsContainer.querySelector('figure'));
-
+        document.querySelector('x-media').play();
       }
       if(componentsContainer.querySelector('#arrows')){
         componentsContainer.removeChild(componentsContainer.querySelector('#arrows'));
@@ -413,18 +414,18 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
           componentsContainer.removeChild(document.querySelector('drag-resize'));
         }
       }
-      
+
 
 
     }
     scrollHorizontal.onResizeEvent=function(cmps){
-      console.log("layout changed");     
+      console.log("layout changed");
       var width = window.innerWidth ||document.documentElement.clientWidth ||document.body.clientWidth;
       var height = window.innerHeight ||document.documentElement.clientHeight ||document.body.clientHeight;
 
       for(var i=0;i<cmps.length;i++)
-     {         
-        cmps[i].style.position='absolute'; 
+     {
+        cmps[i].style.position='absolute';
         cmps[i].style.width=width+'px';
         cmps[i].style.height=height+'px';
       }
@@ -439,7 +440,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
 
       scrollHorizontal.listeners.forEach (function(listener){
       for(var i=0;i<cmps.length;i++){
-        cmps[i].removeEventListener('trackend',listener,true);    
+        cmps[i].removeEventListener('trackend',listener,true);
 
       }
       document.querySelector('#downArrowImg').removeEventListener('tap',listener,true);
@@ -451,7 +452,6 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
     }
 
     scrollHorizontal.__moduleName = "scrollHorizontalLayout";
-    console.log(scrollHorizontal);
     return scrollHorizontal;
 
   });

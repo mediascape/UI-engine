@@ -2,7 +2,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
   function(LayoutConstructor){
 
     var menu = new LayoutConstructor('menu');
-
+    var timer='';
     menu.onComponentsChange = function (cmps){
         console.log("test");
         this.cmps = cmps;
@@ -23,10 +23,10 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
         components[i].style.borderLeft='';
         components[i].style.animationName='';
         components[i].style.animationDuration='';
-        components[i].style.display='block';
+        //components[i].style.display='block';
 
         components[i].style.left='';
-        components[i].style.transformOrigin= ''; 
+        components[i].style.transformOrigin= '';
         components[i].style.outline='';
         components[i].style.transform='';
 
@@ -65,7 +65,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
                                                     componentsContainer.querySelector('figure'));
         }
         componentsContainer.querySelector('figure').parentNode.removeChild(componentsContainer.querySelector('figure'));
-
+        document.querySelector('x-media').play();
       }
       if(componentsContainer.querySelector('#arrows')){
         componentsContainer.removeChild(componentsContainer.querySelector('#arrows'));
@@ -117,7 +117,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
       for(var i=0;i<comp_num+1;i++){
 
             if(i===0){
-              cl.innerHTML = '.class0 {background-color:black;object-fit:fill; grid-column:1/span '+(col_num-1)+';width:'+(width-30)+'px; grid-row:1/span 2;height:'+(main_comp_height+space)+'px;z-index:1;}';
+              cl.innerHTML = '.class0 {background-color:white;object-fit:fill; grid-column:1/span '+(col_num-1)+';width:'+(width-30)+'px; grid-row:1/span 2;height:'+(main_comp_height+space)+'px;z-index:1;}';
               document.getElementsByTagName('head')[0].appendChild(cl);
 
               if(resize!=true && resize!=false && show!=true && show!=false){
@@ -234,7 +234,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
         cmps[i].style.display='block';
 
         cmps[i].style.left='';
-        cmps[i].style.transformOrigin= ''; 
+        cmps[i].style.transformOrigin= '';
         cmps[i].style.outline='';
         cmps[i].style.transform='';
 
@@ -273,7 +273,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
                                                     componentsContainer.querySelector('figure'));
         }
         componentsContainer.querySelector('figure').parentNode.removeChild(componentsContainer.querySelector('figure'));
-
+        document.querySelector('x-media').play();
       }
       if(componentsContainer.querySelector('#arrows')){
         componentsContainer.removeChild(componentsContainer.querySelector('#arrows'));
@@ -289,9 +289,9 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
           componentsContainer.removeChild(document.querySelector('drag-resize'));
         }
       }
-      
 
-      
+
+
     }
     menu.onResizeEvent=function(cmps){
       console.log("layout changed");
@@ -336,7 +336,7 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
         }
       this.render(cmps,show);
       var self=this;
-      var timer=setTimeout(function(){
+      this.timer=setTimeout(function(){
       show=false;
         for(var i=1;i<cmps.length;i++){
           if(document.querySelector('#compDiv'+i)!=null){
@@ -353,16 +353,18 @@ define(["mediascape/AdaptationToolkit/adaptation/UIAdaptation/layoutConstructor"
        //mediascape.AdaptationToolkit.Adaptation.UIAdaptation.updateComponentQuery();
       },3000);
 
-      return timer;
+      return this.timer;
     }
-    menu.unload = function(cmps){}
+    menu.unload = function(cmps){
+
+      clearTimeout(this.timer);
+    }
 
 
 
 
 
     menu.__moduleName = "menuLayout";
-    console.log(menu);
     return menu;
 
   });
