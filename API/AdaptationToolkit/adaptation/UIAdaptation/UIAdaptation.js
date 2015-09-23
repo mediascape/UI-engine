@@ -225,7 +225,8 @@ define(
                 console.log (layoutIndex,cmps.length);
                 actualLayout.unload(cmps);
 
-                actualLayout = This.findBestLayout(cmps)[0];
+                if (This.layoutMode === This.LAYOUTMODE.ADAPTABLE) 
+                    actualLayout = This.findBestLayout(cmps)[0];
                 this.layout(cmps,'onLayoutChange');
 
                 this.forceRedraw();
