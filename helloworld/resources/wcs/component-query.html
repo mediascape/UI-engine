@@ -35,13 +35,12 @@
       var self = this;
       var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
       this.observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
+      var mutation = mutations[mutations.length-1];
           if (mutation.attributeName === 'style'){
-            this.updateNodes();
+            self.updateNodes();
             var event = new CustomEvent('resize', { 'detail': 'emulate' });
             window.dispatchEvent(event);
           }
-        },self);
       });
       this.observer.observe(this, {
         attributes: true,
