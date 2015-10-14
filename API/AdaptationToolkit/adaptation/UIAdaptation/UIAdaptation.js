@@ -248,13 +248,13 @@ define(
 
       }
 
-        /*
-        if (event.detail !="emulate")
-        {
-          console.log("RESIZING",event);
-          this.layout(cmps,'onResizeEvent');
+     else{
+          if (event.detail !="emulate")
+          {
+            console.log("RESIZING",event);
+            this.layout(cmps,'onResizeEvent');
+          }
         }
-        */
 
 
 
