@@ -64,10 +64,10 @@ define(
         // Filter only webcomponents
         cmps = _.toArray(cmps);
         var promise = CssParser.readCustomCss(file,layoutProp).then(function(data){
-
+            var compId = 0;
             components = cmps.filter(function(el,i){
             // custom elements determines that name has to be composite tag separeted by "-". ex : my-component
-                if (el.nodeName.split('-').length === 2){
+                if (el.nodeName.split('-').length >= 2){
                     var id = el.getAttribute('id');
                     el.setAttribute('touch-action','none');
                     el.setAttribute('drag-resize','');
@@ -75,7 +75,7 @@ define(
                         htmlelement.setAttribute('touch-action','none');
                         htmlelement.style.webkitUserSelect="none";
                     });
-                    el.setAttribute('compId','compId'+i);
+                    el.setAttribute('compId','compId'+compId);
                     data.forEach(function(properties){
                         if (Object.keys(properties).indexOf(id)>-1) {
                           el['lproperties'] = properties[id] ;
@@ -85,6 +85,7 @@ define(
                         }
 
                     });
+                    compId++;
 
                 // Inject component-query to each webcomponent
                 //  el.setAttribute('extends','component-query');
