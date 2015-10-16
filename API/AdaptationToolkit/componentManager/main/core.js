@@ -114,7 +114,7 @@ define(
             window.dispatchEvent(event);
             clearInterval(iid);
           }
-
+        return ready;
       }
       this.getFile = function(file){
         return $.ajax({
