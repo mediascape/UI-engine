@@ -246,9 +246,7 @@ define(
       else{
          prev_orientation=event.srcElement.orientation;
 
-      }
-
-     else{
+      
           if (event.detail !="emulate")
           {
             console.log("RESIZING",event);
