@@ -26,7 +26,7 @@ Clone the repository to the root folder of a Web server, or download it and extr
 Ensure that index.html file has the reference to the [minimized javascript file](https://github.com/mediascape/UI-engine/blob/master/helloworld/js/mediascape.uiengine.min.js)
 
 #####Development
-Download the `deploy.sh` script (it works for Linux).  
+Download the [`deploy.sh`](https://raw.githubusercontent.com/mediascape/UI-engine/master/helloworld/deploy.sh) script (it works for Linux).  
 This script will:
 
 1. clone the git and install everything in a folder called `deploy` relative to the file itsself
