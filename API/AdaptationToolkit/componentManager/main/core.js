@@ -1,4 +1,4 @@
-/*
+https://raw.githubusercontent.com/mediascape/elections/master/www/js/mediascape/AdaptationToolkit/componentManager/main/core.jshttps://raw.githubusercontent.com/mediascape/elections/master/www/js/mediascape/AdaptationToolkit/componentManager/main/core.js/*
 ** Long Library Name:
 **      Adaptation toolkit Module
 **
@@ -43,12 +43,18 @@ define(
     var core = function(){
 
       var components = [];
+      var componentStatus = undefined;
       this.init = function (){
-        var layoutProp=['order','rwidth','propx','propy','bestfit','required',"needs","duplicable","movable"];
-        var file='resources/layout/components.layout';
+        console.log("BARRUAN");
+        var layoutProp=['order','rwidth','propx','propy','bestfit','required',"needs","duplicable","movable","icon"];
+        var file='/resources/layout/components.layout';
+        var _this = this;
         this.parseComponents(file,layoutProp).then(function(cmps){
+          console.log("PARSING",cmps);
           var event = new CustomEvent("adaptationToolkit-ready", {"detail":{"loaded":true,components:cmps}});
+
           setTimeout(function(){document.dispatchEvent(event);},2000);
+          _this.components = cmps;
         });
       }
       this.setComponentValue = function (cmp,property,value) {
@@ -64,18 +70,18 @@ define(
         // Filter only webcomponents
         cmps = _.toArray(cmps);
         var promise = CssParser.readCustomCss(file,layoutProp).then(function(data){
-            var compId = 0;
+
             components = cmps.filter(function(el,i){
             // custom elements determines that name has to be composite tag separeted by "-". ex : my-component
-                if (el.nodeName.split('-').length >= 2){
+                if (el.nodeName.split('-').length >= 2 ){
                     var id = el.getAttribute('id');
                     el.setAttribute('touch-action','none');
                     el.setAttribute('drag-resize','');
-                    el.shadowRoot.querySelectorAll('div,span').array().forEach(function(htmlelement){
+                    [].slice.call(el.querySelectorAll('div,span')).forEach(function(htmlelement){
                         htmlelement.setAttribute('touch-action','none');
                         htmlelement.style.webkitUserSelect="none";
                     });
-                    el.setAttribute('compId','compId'+compId);
+                    el.setAttribute('compId','compId'+i);
                     data.forEach(function(properties){
                         if (Object.keys(properties).indexOf(id)>-1) {
                           el['lproperties'] = properties[id] ;
@@ -85,7 +91,6 @@ define(
                         }
 
                     });
-                    compId++;
 
                 // Inject component-query to each webcomponent
                 //  el.setAttribute('extends','component-query');
@@ -102,7 +107,16 @@ define(
         return promise;
       };
       this.getComponents = function (){
+        /*for (c in components){
+           components[c] = document.querySelector('#'+components[c].id);
+        }*/
         return components;
+      }
+      this.getComponentsStatus = function (){
+        return componentStatus || [];
+      }
+      this.setComponentsStatus = function (status){
+        componentStatus = status;
       }
       this.checkComponentsReady = function(){
           var ready = components.every(function(cmp){
@@ -114,7 +128,7 @@ define(
             window.dispatchEvent(event);
             clearInterval(iid);
           }
-        return ready;
+
       }
       this.getFile = function(file){
         return $.ajax({
@@ -122,6 +136,16 @@ define(
           dataType: "text"
         });
       };
+	  this.getComoponentsToShow = function (){
+    if (componentStatus)
+		 return componentStatus.filter (function(c){
+				if (c.show) return true;}).map(
+				function(c2){
+					return document.querySelector("div [compId='"+c2.compId+"']");
+        });
+     else return [];
+
+	  }
       this.getHiddenComponents = function(showedCmp){
         return components.filter(function(cmp){
                return showedCmp.every(function(cmp2){
@@ -130,6 +154,25 @@ define(
                });
         });
       }
+      this.isLoaded = function(cmp){
+          if (componentStatus)
+          for (c in componentStatus){
+             if (componentStatus[c].selector === cmp.id)
+               if (componentStatus[c].show) return true;
+               else return false;
+          }
+         return false;
+      }
+      this.setMenu = function (show){
+         if (show){
+            mediascape.AdaptationToolkit.uiComponents.showComponentMenu(components);
+         }
+         else {
+             mediascape.AdaptationToolkit.uiComponents.hideComponentMenu(components);
+         }
+
+      }
+
       var iid = setInterval(this.checkComponentsReady.bind(this),500);
       // Wrapp components into main div #componentsContainer does not work on gecko
       function wrappComponents (cmps){
@@ -137,12 +180,14 @@ define(
         componentsContainer.id = "componentsContainer";
         document.body.appendChild(componentsContainer);
         cmps.forEach(function(c){
-          componentsContainer.appendChild(c);
-        })
+	        var node = document.querySelector('#'+c.id);
+          c = node;
+          componentsContainer.appendChild(node);
+        });
 
       }
 
-      document.addEventListener('mediascape-ready',this.init.bind(this),false);
+      document.addEventListener('mediascape-modules-ready',this.init.bind(this),false);
     };
 
 

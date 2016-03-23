@@ -206,7 +206,7 @@ function(LayoutConstructor){
           mediascape.AdaptationToolkit.Adaptation.UIAdaptation.updateComponentQuery();
         }
 
-        ordered_cmps[i].removeEventListener(mouseOverFunc);
+        ordered_cmps[i].removeEventListener('mouseover',mouseOverFunc,true);
 
         Polymer.addEventListener(ordered_cmps[i],'mouseover',mouseOverFunc,true);
         Polymer.addEventListener(ordered_cmps[i],'mouseleave',mouseLeaveFunc,true);

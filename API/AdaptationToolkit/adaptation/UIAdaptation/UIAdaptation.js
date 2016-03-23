@@ -225,7 +225,7 @@ define(
                 console.log (layoutIndex,cmps.length);
                 actualLayout.unload(cmps);
 
-                if (This.layoutMode === This.LAYOUTMODE.ADAPTABLE) 
+                if (This.layoutMode === This.LAYOUTMODE.ADAPTABLE)
                     actualLayout = This.findBestLayout(cmps)[0];
                 this.layout(cmps,'onLayoutChange');
 
@@ -246,7 +246,7 @@ define(
       else{
          prev_orientation=event.srcElement.orientation;
 
-      
+
           if (event.detail !="emulate")
           {
             console.log("RESIZING",event);
@@ -769,7 +769,7 @@ define(
 
 
       this.updateComponentQuery = function (cmp){
-        var cmps = mediascape.AdaptationToolkit.componentManager.core.getComponents();
+      var cmps = mediascape.AdaptationToolkit.componentManager.core.getComoponentsToShow();
         var event = new CustomEvent('resize', { 'detail': 'emulate' });
         window.dispatchEvent(event);
         for (var x = 0 ; x< cmps.length;x++)

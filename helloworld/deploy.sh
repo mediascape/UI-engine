@@ -84,8 +84,10 @@ fi
 
 cd $InstallFolder/
 echo "Installing dependencies..."
-npm install
-npm install -g requirejs
+sudo npm install
+sudo npm install log4js
+sudo npm install mongoose
+sudo npm install -g requirejs
 cd $InstallFolder/www/
 echo "Minimizing mediascape.uiengine.js ..."
 r.js -o build.js
