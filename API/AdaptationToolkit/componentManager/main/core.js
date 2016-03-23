@@ -1,3 +1,4 @@
+/**
 https://raw.githubusercontent.com/mediascape/elections/master/www/js/mediascape/AdaptationToolkit/componentManager/main/core.jshttps://raw.githubusercontent.com/mediascape/elections/master/www/js/mediascape/AdaptationToolkit/componentManager/main/core.js/*
 ** Long Library Name:
 **      Adaptation toolkit Module
