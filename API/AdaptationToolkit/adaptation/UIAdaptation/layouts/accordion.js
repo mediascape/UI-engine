@@ -249,7 +249,7 @@ function(LayoutConstructor){
           mediascape.AdaptationToolkit.Adaptation.UIAdaptation.updateComponentQuery();
         }
 
-        ordered_cmps[i].removeEventListener(tapFunc);
+        ordered_cmps[i].removeEventListener('hold',tapFunc,true);
 
 
 
