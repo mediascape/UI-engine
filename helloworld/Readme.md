@@ -56,6 +56,7 @@ The minified version for the 'Production' is generated each time the deploy.sh s
 # Result
 
 Six different layouts are available in order to show the components in different organisations:
+[Old video](https://vimeo.com/121661299)
 
 Pip Layout
 ---------
